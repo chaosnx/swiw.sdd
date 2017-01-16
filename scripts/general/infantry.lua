@@ -192,12 +192,14 @@ function script.setSFXoccupy(level)
 
     if level == 0 then
         local tid = Spring.GetUnitTransporter(unitID)
-        local transport = Spring.GetCOBGlobalVar(tid)
-        if transport == 25 then -- imp bunker
+        local transport = UnitDefs[Spring.GetUnitDefID(tid)].name
+        Spring.Log("reb_i_trooper", "warning", transport)
+        -- local transport = Spring.GetCOBGlobalVar(tid)
+        if transport == "reb_p_flagecon1" or transport == "imp_p_flagmil1" or transport == "imp_p_flagecon1" then -- imp bunker
             inBunker = 1
-        elseif transport == 104 then -- imp pillbox
+        elseif transport == "imp_d_pillbox" then -- imp pillbox
             inBunker = 1
-        elseif transport == 2 then -- imp LAAT
+        elseif transport == "imp_a_laat" then -- imp LAAT
             Signal(SIG_DYING)
             inBunker = 2
             units_in_transport = Spring.GetUnitIsTransporting(tid)
@@ -223,7 +225,7 @@ function script.setSFXoccupy(level)
             WaitForTurn(rthigh, x_axis)
             WaitForTurn(lleg, x_axis)
             WaitForTurn(rleg, x_axis)
-        elseif transport == 99 then -- rebel APC
+        elseif transport == "reb_v_groundtransport" then -- rebel APC
             inBunker = 3
             Hide(pelvis)
             Hide(lthigh)
@@ -293,7 +295,6 @@ function script.setSFXoccupy(level)
             WaitForTurn(rleg, x_axis)
 
             StartThread(WeaponReady)
-            StartThread(MotionControl)
         end
         inBunker = 0
     end
