@@ -159,7 +159,12 @@ if (gadgetHandler:IsSyncedCode()) then
 									if (captureList[unitID].allyID ~= flag.allyID) then
 									
 										-- Check if it is able to capture right now (ie it isnt shooting)
-										local _, canCapture = CallCOBScript(unitID, "CanCapture", 1, 1)
+                                        local env = Spring.UnitScript.GetScriptEnv(unitID)
+                                        if env == nil then
+    										local _, canCapture = CallCOBScript(unitID, "CanCapture", 1, 1)
+                                        else
+                                            canCapture = Spring.UnitScript.CallAsUnit(unitID, env.CanCapture)
+                                        end
 										if (canCapture ~= 0) then
 											-- It can capture, so add it to the list
 											table.insert(unitList,unitID)
@@ -172,7 +177,12 @@ if (gadgetHandler:IsSyncedCode()) then
 										end
 
 									else -- repair the flag
-										local _, canCapture = CallCOBScript(unitID, "CanCapture", 1, 1)
+                                        local env = Spring.UnitScript.GetScriptEnv(unitID)
+                                        if env == nil then
+    										local _, canCapture = CallCOBScript(unitID, "CanCapture", 1, 1)
+                                        else
+                                            canCapture = Spring.UnitScript.CallAsUnit(unitID, env.CanCapture)
+                                        end
 										if (canCapture ~= 0) then
 											-- It can capture, so add it to the list
 											table.insert(unitRepairList,unitID)

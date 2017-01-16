@@ -6,6 +6,8 @@
 	icontype=inf_light;
 	soundcategory=reb-i-trooper;
 	category=GROUND INFANTRY;
+    script=reb_i_trooper.lua;
+    corpse=reb_i_trooper_dead_seq1_head1;
 
 	name=Fleet Trooper;
 	description=Rebel Soldier;
@@ -51,7 +53,6 @@
 	onlytargetcategory1=GROUND VTOL;
 	weaponmaindir1=0 0 1;
 	maxangledif1=190;
-	weapon2=reb_i_trooper;
 	[sfxtypes]
 	{
 		explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_RED;

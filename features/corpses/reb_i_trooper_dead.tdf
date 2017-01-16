@@ -8,6 +8,7 @@
 	footprintx=1;
 	footprintz=1;
 	reclaimable=0;
+    smokeTime=0;
 }
 [reb_i_trooper_dead_seq1_head2]
 {
@@ -19,6 +20,7 @@
 	footprintx=1;
 	footprintz=1;
 	reclaimable=0;
+    smokeTime=0;
 }
 [reb_i_trooper_dead_seq1_head3]
 {
@@ -30,4 +32,5 @@
 	footprintx=1;
 	footprintz=1;
 	reclaimable=0;
+    smokeTime=0;
 }
