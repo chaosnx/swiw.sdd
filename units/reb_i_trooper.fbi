@@ -7,7 +7,6 @@
 	soundcategory=reb-i-trooper;
 	category=GROUND INFANTRY;
     script=reb_i_trooper.lua;
-    corpse=reb_i_trooper_dead_seq1_head1;
 
 	name=Fleet Trooper;
 	description=Rebel Soldier;
