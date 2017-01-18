@@ -6,6 +6,7 @@
 	icontype=air_trans;
 	soundcategory=reb-a-vwing;
 	category=VTOL TAKESGROUNDFIRE;
+    script=reb_a_shuttle.lua;
 
 	name=Air Shuttle;
 	description=Infantry Transport;
