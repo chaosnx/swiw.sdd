@@ -110,7 +110,7 @@ local function Run()
             WaitForMove(pelvis, y_axis)
             WaitForTurn(lleg, x_axis)
         end
-        Sleep(randomSeed)
+        Sleep(randomSeed / 5)
     end
 end
 
@@ -193,7 +193,6 @@ function script.setSFXoccupy(level)
     if level == 0 then
         local tid = Spring.GetUnitTransporter(unitID)
         local transport = UnitDefs[Spring.GetUnitDefID(tid)].name
-        Spring.Log("reb_i_trooper", "warning", transport)
         -- local transport = Spring.GetCOBGlobalVar(tid)
         if transport == "reb_p_flagecon1" or transport == "imp_p_flagmil1" or transport == "imp_p_flagecon1" then -- imp bunker
             inBunker = 1
@@ -245,7 +244,7 @@ function script.setSFXoccupy(level)
                 if randHead == 2 then
                     Hide(head2)
                 elseif randHead == 3 then
-                    Hide(head)
+                    Hide(head3)
                 end
                 if HEADEXTRAS1 ~= nil then
                     HEADEXTRAS1()
