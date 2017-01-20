@@ -56,16 +56,18 @@ local function Run()
         end
     end
 
+    Turn(pelvis, x_axis, math.rad(8 * maxAngle) / 100, math.rad(80 * runSpeed))
+    Turn(torso, x_axis, math.rad(4 * maxAngle) / 100, math.rad(80 * runSpeed))
     while true do
         if bMoving then
-            Turn(pelvis, x_axis, math.rad(8 * maxAngle) / 100, math.rad(80 * runSpeed))
-            Turn(torso, x_axis, math.rad(4 * maxAngle) / 100, math.rad(80 * runSpeed))
+            -- Turn(pelvis, x_axis, math.rad(8 * maxAngle) / 100, math.rad(80 * runSpeed))
+            -- Turn(torso, x_axis, math.rad(4 * maxAngle) / 100, math.rad(80 * runSpeed))
             Turn(torso, y_axis, math.rad(-20 * maxAngle) / 100, math.rad(10 * runSpeed))
-            Move(pelvis, y_axis, 0, math.rad(200 * runSpeed))
-            WaitForTurn(pelvis, x_axis)
-            WaitForTurn(torso, x_axis)
-            WaitForTurn(torso, y_axis)
-            WaitForMove(pelvis, y_axis)
+            Move(pelvis, y_axis, 0, math.rad(200) * runSpeed)
+            -- WaitForTurn(pelvis, x_axis)
+            -- WaitForTurn(torso, x_axis)
+            -- WaitForTurn(torso, y_axis)
+            -- WaitForMove(pelvis, y_axis)
         end
         if bMoving then
             Turn(rleg, x_axis, math.rad(85 * maxAngle) / 100, math.rad(30 * runSpeed))
@@ -76,7 +78,7 @@ local function Run()
             Turn(lthigh, x_axis, math.rad(20 * maxAngle) / 100, math.rad(20 * runSpeed))
             Turn(lthigh, y_axis, math.rad(0 * maxAngle) / 100, math.rad(20 * runSpeed))
             Turn(lthigh, z_axis, math.rad(0 * maxAngle) / 100, math.rad(20 * runSpeed))
-            Move(pelvis, y_axis, 1.75, 160 * runSpeed)
+            Move(pelvis, y_axis, 1.75, math.rad(160) * runSpeed)
             WaitForTurn(rleg, x_axis)
             WaitForTurn(lleg, x_axis)
             WaitForTurn(rthigh, x_axis)
@@ -85,32 +87,32 @@ local function Run()
             WaitForTurn(lthigh, x_axis)
             WaitForTurn(lthigh, y_axis)
             WaitForTurn(lthigh, z_axis)
-            WaitForMove(pelvis, y_axis)
+            -- WaitForMove(pelvis, y_axis)
         end
 
         if bMoving then
             Turn(rleg, x_axis, math.rad(55 * maxAngle) / 100, math.rad(60 * runSpeed))
             Turn(torso, y_axis, math.rad(20 * maxAngle) / 100, math.rad(10 * runSpeed))
-            Move(pelvis, y_axis, 0, 300 * runSpeed)
+            Move(pelvis, y_axis, 0, math.rad(300) * runSpeed)
             Turn(lleg, x_axis, math.rad(85 * maxAngle) / 100, math.rad(30 * runSpeed))
             Turn(rleg, x_axis, math.rad(25 * maxAngle) / 100, math.rad(40 * runSpeed))
             Turn(lthigh, x_axis, math.rad(-45 * maxAngle) / 100, math.rad(20 * runSpeed))
             WaitForTurn(rleg, x_axis)
-            WaitForTurn(torso, y_axis)
-            WaitForMove(pelvis, y_axis)
+            -- WaitForTurn(torso, y_axis)
+            -- WaitForMove(pelvis, y_axis)
             WaitForTurn(lleg, x_axis)
             WaitForTurn(rleg, x_axis)
             WaitForTurn(lthigh, x_axis)
         end
         if bMoving then
             Turn(rthigh, x_axis, math.rad(20 * maxAngle) / 100, math.rad(30 * runSpeed))
-            Move(pelvis, y_axis, 1.75, 160 * runSpeed)
+            Move(pelvis, y_axis, 1.75, math.rad(160) * runSpeed)
             Turn(lleg, x_axis, math.rad(55 * maxAngle) / 100, math.rad(60 * runSpeed))
             WaitForTurn(rthigh, x_axis)
-            WaitForMove(pelvis, y_axis)
+            -- WaitForMove(pelvis, y_axis)
             WaitForTurn(lleg, x_axis)
         end
-        Sleep(randomSeed / 5)
+        Sleep(randomSeed)
     end
 end
 
