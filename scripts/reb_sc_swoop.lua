@@ -110,7 +110,7 @@ function script.Killed(recentDamage, maxHealth)
     if OverWater >= 4 and severity <= 25 then
         return 1
     elseif severity <= 50 then
-        Explode(base, SFX.SFX.SHATTER)
+        Explode(base, SFX.SHATTER)
         return 2
     end
     Explode(gun, SFX.FALL + SFX.FIRE + SFX.SMOKE)
