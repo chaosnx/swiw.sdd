@@ -33,16 +33,16 @@ include "general/smokeunit_sws.lua"
 UNIT_ROOT = base
 UNIT_BELOW_GROUND_DIST = -55
 UNIT_RISE_SPEED = 4
-DUSTFX = 1024+1
+DUSTFX = SFX.CEG+1
 DUSTFXPT1 = base
 DUSTFXPT2 = door
 include "general/rebel_unit_build.lua"
 
 function script.Create()
-	Turn(door, x_axis, math.rad(-102))
-	StartThread(SmokeUnit_SWS)
-	ConstructionAnim()
-	Move(base, y_axis, 0)
+    Turn(door, x_axis, math.rad(-102))
+    StartThread(SmokeUnit_SWS)
+    ConstructionAnim()
+    Move(base, y_axis, 0)
     StartThread(DropFixer)
 end
 
@@ -52,64 +52,64 @@ end
 
 function script.BeginTransport(passengerID)
     passengers[men] = passengerID
-	men = men + 1
-	Turn(door, x_axis, 0, math.rad(120))
-	Sleep(1000)
-	Turn(door, x_axis, math.rad(-102), math.rad(120))
+    men = men + 1
+    Turn(door, x_axis, 0, math.rad(120))
+    Sleep(1000)
+    Turn(door, x_axis, math.rad(-102), math.rad(120))
 end
 
 function script.TransportDrop(passengerID, x, y, z)
     local bpx, bpy, bpz = Spring.GetUnitBasePosition(unitID)
-	men = men - 1
-	Turn(door, x_axis, 0, math.rad(120))
+    men = men - 1
+    Turn(door, x_axis, 0, math.rad(120))
     Spring.UnitScript.DropUnit(passengerID)
     Spring.SetUnitPosition(passengerID, x, y, z)
     passengers[men] = nil
-	Sleep(5000)
-	Turn(door, x_axis, math.rad(-102), math.rad(120))
+    Sleep(5000)
+    Turn(door, x_axis, math.rad(-102), math.rad(120))
 end
 
 local function getCommandId() 
-	local cmd=Spring.GetCommandQueue(unitID, 1)
-	if cmd and cmd[1] then		
-		return cmd[1]['id']		
-	end
-	return nil
+    local cmd=Spring.GetCommandQueue(unitID, 1)
+    if cmd and cmd[1] then        
+        return cmd[1]['id']        
+    end
+    return nil
 end
 
 local function getDropPoint() 
-	local cmd=Spring.GetCommandQueue(unitID, 1)
-	local dropx, dropy, dropz = nil	
-	
-	if cmd and cmd[1] then					
-		if cmd[1]['id'] == CMD.UNLOAD_UNIT or cmd[1]['id'] == CMD.UNLOAD_UNITS then
-			dropx, dropy, dropz = cmd[1]['params'][1], cmd[1]['params'][2], cmd[1]['params'][3]				
-		end
-	end
-	return {dropx, dropy, dropz}
+    local cmd=Spring.GetCommandQueue(unitID, 1)
+    local dropx, dropy, dropz = nil    
+    
+    if cmd and cmd[1] then                    
+        if cmd[1]['id'] == CMD.UNLOAD_UNIT or cmd[1]['id'] == CMD.UNLOAD_UNITS then
+            dropx, dropy, dropz = cmd[1]['params'][1], cmd[1]['params'][2], cmd[1]['params'][3]                
+        end
+    end
+    return {dropx, dropy, dropz}
 end
 
 local function isNearDropPoint(transportUnitId, requiredDist)
-	if transportUnitId == nil then
-		return false
-	end
+    if transportUnitId == nil then
+        return false
+    end
 
-	local px, py, pz = Spring.GetUnitBasePosition(transportUnitId)
-	local dropPoint = getDropPoint()
-	local px2, py2, pz2 = dropPoint[1], dropPoint[2], dropPoint[3]
+    local px, py, pz = Spring.GetUnitBasePosition(transportUnitId)
+    local dropPoint = getDropPoint()
+    local px2, py2, pz2 = dropPoint[1], dropPoint[2], dropPoint[3]
     if px2 == nil then
         return false
     end
-	
-	local dx = px - px2
-	local dz = pz - pz2 
-	local dist = (dx^2 + dz^2)
-	
-	if dist < requiredDist^2 then
-		return true
-	else
-		return false
-	end	
+    
+    local dx = px - px2
+    local dz = pz - pz2 
+    local dist = (dx^2 + dz^2)
+    
+    if dist < requiredDist^2 then
+        return true
+    else
+        return false
+    end    
 end
 
 local moveRate
@@ -133,8 +133,8 @@ local function getMaximumRadius()
 end
 
 function DropFixer()
-	while true do
-		if men > 1 and (getCommandId() == CMD.UNLOAD_UNIT or getCommandId() == CMD.UNLOAD_UNITS) and isNearDropPoint(unitID, 100) then
+    while true do
+        if men > 1 and (getCommandId() == CMD.UNLOAD_UNIT or getCommandId() == CMD.UNLOAD_UNITS) and isNearDropPoint(unitID, 100) then
             -- There is someone loaded, the user called to unload him, and we are close enough
             if moveRate == 0 then
                 -- We are not moving
@@ -161,25 +161,24 @@ function DropFixer()
 
                 end
             end
-		end
+        end
 
-		Sleep(500)		
-	end
+        Sleep(500)        
+    end
 end
 
 function script.Killed(recentDamage, maxHealth)
-	local severity = recentDamage / maxHealth * 100
+    local severity = recentDamage / maxHealth * 100
 
-	Explode(base, SFX.NONE)
-	Explode(enginer, SFX.FALL + SFX.FIRE + SFX.SMOKE)
-	Explode(enginel, SFX.FALL + SFX.FIRE + SFX.SMOKE)
-	if severity <= 25 then
-		return 1
-	elseif severity <= 50 then
-		return 2
-	elseif severity <= 99 then
-		return 3
-    else
-        return 3        
+    Explode(base, SFX.NONE)
+    Explode(enginer, SFX.FALL + SFX.FIRE + SFX.SMOKE)
+    Explode(enginel, SFX.FALL + SFX.FIRE + SFX.SMOKE)
+    if severity <= 25 then
+        return 1
+    elseif severity <= 50 then
+        return 2
+    elseif severity <= 99 then
+        return 3
     end
+    return 3        
 end

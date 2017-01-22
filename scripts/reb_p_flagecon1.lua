@@ -19,7 +19,7 @@ SMOKEPIECE4 = upgreebles2
 
 include "general/smokeunit_sws.lua"
 
-local smoke = 1024+0
+local smoke = SFX.CEG+0
 local SIG_ACTIVATED = 4
 
 function script.Create()

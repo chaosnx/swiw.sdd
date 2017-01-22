@@ -36,7 +36,7 @@ NORMAL_SPEED = 11.7
 NORMAL_MAX_ANGLE = 130
 SLOW_SPEED = 5.8
 SLOW_MAX_ANGLE = 65
-MUZZLEFLASH1 = 1024+0
+MUZZLEFLASH1 = SFX.CEG+0
 include "general/infantry.lua"
 include "general/rebel_randomhead.lua"
 

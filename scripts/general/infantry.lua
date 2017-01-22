@@ -337,7 +337,7 @@ end
 
 function script.AimWeapon1(heading, pitch)
     if Spring.GetUnitIsDead(unitID) then
-        return
+        return false
     end
 
     Signal(SIG_AIM)
@@ -345,7 +345,7 @@ function script.AimWeapon1(heading, pitch)
 
     if inBunker == 1 then
         -- He is building process, skip aiming
-        return 0
+        return false
     end
 
     runSpeed = SLOW_SPEED;

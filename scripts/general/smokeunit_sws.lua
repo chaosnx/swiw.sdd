@@ -9,7 +9,7 @@
 -- #define SMOKEPIECE3 foot
 -- #define SMOKEPIECE4 someotherthing.
 
-local SMOKEPUFF_SWS = 1024
+local SMOKEPUFF_SWS = SFX.CEG
 function SmokeUnit_SWS()
     while true do
         -- First, we sleep.  No point in checking this all the time, right? 2 times a second is good enough.
