@@ -705,7 +705,7 @@ function AIMING_STEADY_POSE(heading, pitch)
 end
 
 function AIMING_RUN_POSE(heading, pitch)
-    if heading < -1.570796251296997 or heading > -1.570796251296997 then
+    if heading < -maxAngle or heading > maxAngle then
         -- We can not aim the target
         return false
     end

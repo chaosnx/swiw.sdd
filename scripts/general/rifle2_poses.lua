@@ -294,7 +294,6 @@ function AIMING_STEADY_POSE(heading, pitch)
         WaitForTurn(flare, x_axis)
         WaitForTurn(flare, z_axis)
         WaitForTurn(flare, y_axis)
-    elseif USE_POSE == 3 then
     end
     WaitForTurn(base, x_axis)
     WaitForTurn(base, y_axis)
@@ -304,7 +303,7 @@ function AIMING_STEADY_POSE(heading, pitch)
 end
 
 function AIMING_RUN_POSE(heading, pitch)
-    if heading < -1.570796251296997 / 2 or heading > -1.570796251296997 / 2 then
+    if heading < -maxAngle or heading > maxAngle then
         -- We can not aim the target
         return false
     end

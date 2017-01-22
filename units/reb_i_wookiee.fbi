@@ -6,6 +6,7 @@
 	icontype=inf_heavy;
 	soundcategory=reb-i-wookiee;
 	category=GROUND INFANTRY;
+	script=reb_i_wookiee.lua;
 
 	name=Wookiee;
 	description=Rebel Soldier;
@@ -51,7 +52,6 @@
 	onlytargetcategory1=GROUND VTOL;
 	weaponmaindir1=0 0 1;
 	maxangledif1=190;
-	weapon2=reb_i_wookiee;
 	[sfxtypes]
 	{
 		explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_BLUE;
