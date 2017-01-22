@@ -363,10 +363,10 @@ function AIMING_STEADY_POSE(heading, pitch)
         USE_POSE = 1
     end
 
+    Turn(base, x_axis, 0.0, math.rad(500))
+    Turn(base, y_axis, heading, math.rad(300))
+    Turn(base, z_axis, 0.0, math.rad(500))
     if USE_POSE == 1 then
-        Turn(base, x_axis, 0.0, math.rad(500))
-        Turn(base, y_axis, heading, math.rad(500))
-        Turn(base, z_axis, 0.0, math.rad(500))
         Turn(pelvis, x_axis, 0.0, math.rad(500))
         Turn(pelvis, y_axis, 0.9599310755729675, math.rad(500))
         Turn(pelvis, z_axis, 0.0, math.rad(500))
@@ -422,9 +422,6 @@ function AIMING_STEADY_POSE(heading, pitch)
         Turn(flare, y_axis, 0.0, math.rad(500))
         Turn(flare, z_axis, 0.0, math.rad(500))
 
-        WaitForTurn(base, x_axis)
-        WaitForTurn(base, y_axis)
-        WaitForTurn(base, z_axis)
         WaitForTurn(pelvis, x_axis)
         WaitForTurn(pelvis, y_axis)
         WaitForTurn(pelvis, z_axis)
@@ -480,9 +477,6 @@ function AIMING_STEADY_POSE(heading, pitch)
         WaitForTurn(flare, y_axis)
         WaitForTurn(flare, z_axis)
     elseif USE_POSE == 2 then
-        Turn(base, x_axis, 0.0, math.rad(500))
-        Turn(base, y_axis, heading, math.rad(500))
-        Turn(base, z_axis, 0.0, math.rad(500))
         Turn(pelvis, x_axis, 0.0, math.rad(500))
         Turn(pelvis, y_axis, 0.0, math.rad(500))
         Turn(pelvis, z_axis, 0.0, math.rad(500))
@@ -538,9 +532,6 @@ function AIMING_STEADY_POSE(heading, pitch)
         Turn(flare, y_axis, 0.0, math.rad(500))
         Turn(flare, z_axis, 0.0, math.rad(500))
 
-        WaitForTurn(base, x_axis)
-        WaitForTurn(base, y_axis)
-        WaitForTurn(base, z_axis)
         WaitForTurn(pelvis, x_axis)
         WaitForTurn(pelvis, y_axis)
         WaitForTurn(pelvis, z_axis)
@@ -596,9 +587,6 @@ function AIMING_STEADY_POSE(heading, pitch)
         WaitForTurn(flare, y_axis)
         WaitForTurn(flare, z_axis)
     elseif USE_POSE == 3 then
-        Turn(base, x_axis, 0.0, math.rad(500))
-        Turn(base, y_axis, heading, math.rad(500))
-        Turn(base, z_axis, 0.0, math.rad(500))
         Turn(pelvis, x_axis, 0.0, math.rad(500))
         Turn(pelvis, y_axis, 0.0, math.rad(500))
         Turn(pelvis, z_axis, 0.0, math.rad(500))
@@ -654,9 +642,6 @@ function AIMING_STEADY_POSE(heading, pitch)
         Turn(flare, y_axis, 0.0, math.rad(500))
         Turn(flare, z_axis, 0.0, math.rad(500))
 
-        WaitForTurn(base, x_axis)
-        WaitForTurn(base, y_axis)
-        WaitForTurn(base, z_axis)
         WaitForTurn(pelvis, x_axis)
         WaitForTurn(pelvis, y_axis)
         WaitForTurn(pelvis, z_axis)
@@ -712,6 +697,9 @@ function AIMING_STEADY_POSE(heading, pitch)
         WaitForTurn(flare, y_axis)
         WaitForTurn(flare, z_axis)
     end
+    WaitForTurn(base, x_axis)
+    WaitForTurn(base, y_axis)
+    WaitForTurn(base, z_axis)
 
     return true
 end
@@ -719,7 +707,7 @@ end
 function AIMING_RUN_POSE(heading, pitch)
     if heading < -1.570796251296997 or heading > -1.570796251296997 then
         -- We can not aim the target
-        return 0
+        return false
     end
 
     Turn(torso, x_axis, 0.0, math.rad(500))
@@ -762,22 +750,6 @@ function AIMING_RUN_POSE(heading, pitch)
     Turn(flare, y_axis, 0.0, math.rad(500))
     Turn(flare, z_axis, 0.0, math.rad(500))
 
-    WaitForTurn(base, y_axis)
-    WaitForTurn(pelvis, x_axis)
-    WaitForTurn(pelvis, y_axis)
-    WaitForTurn(pelvis, z_axis)
-    WaitForTurn(lthigh, x_axis)
-    WaitForTurn(lthigh, y_axis)
-    WaitForTurn(lthigh, z_axis)
-    WaitForTurn(lleg, x_axis)
-    WaitForTurn(lleg, y_axis)
-    WaitForTurn(lleg, z_axis)
-    WaitForTurn(rthigh, x_axis)
-    WaitForTurn(rthigh, y_axis)
-    WaitForTurn(rthigh, z_axis)
-    WaitForTurn(rleg, x_axis)
-    WaitForTurn(rleg, y_axis)
-    WaitForTurn(rleg, z_axis)
     WaitForTurn(torso, x_axis)
     WaitForTurn(torso, y_axis)
     WaitForTurn(torso, z_axis)
@@ -817,4 +789,6 @@ function AIMING_RUN_POSE(heading, pitch)
     WaitForTurn(flare, x_axis)
     WaitForTurn(flare, y_axis)
     WaitForTurn(flare, z_axis)
+
+    return true
 end

@@ -23,11 +23,11 @@ local smoke = 1024+0
 local SIG_ACTIVATED = 4
 
 function script.Create()
-	Turn(base, y-axis, math.random(math.rad(-20), math.rad(20)))
-	Turn(crates, y-axis, math.random(math.rad(-160), math.rad(160)))
-	Turn(c1, y-axis, math.random(math.rad(-40), math.rad(160)))
-	Turn(c2, y-axis, math.random(0.0, math.rad(70)))
-	Turn(c3, y-axis, math.random(math.rad(-50), 0.0))
+    Turn(base, y-axis, math.random(math.rad(-20), math.rad(20)))
+    Turn(crates, y-axis, math.random(math.rad(-160), math.rad(160)))
+    Turn(c1, y-axis, math.random(math.rad(-40), math.rad(160)))
+    Turn(c2, y-axis, math.random(0.0, math.rad(70)))
+    Turn(c3, y-axis, math.random(math.rad(-50), 0.0))
     StartThread(StartSmoke)
     StartThread(SmokeUnit_SWS)
 end
@@ -36,10 +36,10 @@ end
 local function StartSmoke()
     SetSignalMask(SIG_ACTIVATED)
 
-	while true do
+    while true do
         EmitSfx(smoke1, smoke)
-		Sleep(100)
-	end
+        Sleep(100)
+    end
 end
 
 local function StopSmoke()
@@ -48,24 +48,24 @@ end
 
 function script.Activate()
     StartThread(StartSmoke)
-	return 0
+    return 0
 end
 
 function script.Deactivate()
     StartThread(StopSmoke)
-	return 0
+    return 0
 end
 
 function script.Killed(recentDamage, maxHealth)
-	local severity = recentDamage / maxHealth * 100
+    local severity = recentDamage / maxHealth * 100
 
-	Explode(base, SFX.NONE)
-	if severity <= 25 then
-		return 1
-	elseif severity <= 50 then
-		return 2
-	elseif severity <= 99 then
-		return 3
+    Explode(base, SFX.NONE)
+    if severity <= 25 then
+        return 1
+    elseif severity <= 50 then
+        return 2
+    elseif severity <= 99 then
+        return 3
     else
         return 3        
     end

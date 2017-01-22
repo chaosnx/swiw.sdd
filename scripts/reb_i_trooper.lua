@@ -36,14 +36,12 @@ NORMAL_SPEED = 11.7
 NORMAL_MAX_ANGLE = 130
 SLOW_SPEED = 5.8
 SLOW_MAX_ANGLE = 65
-QUERY_PIECENUM1 = "flare"
 MUZZLEFLASH1 = 1024+0
 include "general/infantry.lua"
 include "general/rebel_randomhead.lua"
 
 function script.Create()
-    Hide(Spring.GetUnitScriptPiece(unitID, 1))
-    bDying = false
+    Hide(flare)
     bMoving = false
     randomSeed = math.random(10, 60)
     maxSpeed = Spring.GetUnitMoveTypeData(unitID).maxSpeed

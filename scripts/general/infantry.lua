@@ -117,7 +117,6 @@ local function Run()
 end
 
 local function IdleAnim01()
-    idleAnim = true
     local randvar = math.random(8, 20)
     Turn(torso, y_axis, math.rad(1 * randvar), math.rad(50))
     Turn(head, y_axis, math.rad(1 * randvar), math.rad(90))
@@ -128,11 +127,10 @@ local function IdleAnim01()
     Turn(head, y_axis, math.rad(1 * randvar), math.rad(90))
     WaitForTurn(torso, y_axis)
     WaitForTurn(head, y_axis)
-    idleAnim = false
+    Sleep(12 * randvar)
 end
 
 local function IdleAnim02()
-    idleAnim = true
     local randvar = math.random(8, 20)
     Turn(torso, y_axis, math.rad(-1 * randvar), math.rad(50))
     Turn(head, y_axis, math.rad(-1 * randvar), math.rad(90))
@@ -143,21 +141,23 @@ local function IdleAnim02()
     Turn(head, y_axis, math.rad(-1 * randvar), math.rad(90))
     WaitForTurn(torso, y_axis)
     WaitForTurn(head, y_axis)
-    idleAnim = false
+    Sleep(12 * randvar)
 end
-
 
 local function Stop()
     Signal(SIG_IDLE_RUN)
     SetSignalMask(SIG_IDLE_RUN + SIG_DYING)
 
     WeaponReady()
-
-    local randIdleAnimation = math.random(1, 2)
-    if randIdleAnimation == 1 then
-        IdleAnim01()
-    elseif randIdleAnimation == 2 then
-        IdleAnim02()
+    while true do
+        idleAnim = true
+        local randIdleAnimation = math.random(1, 2)
+        if randIdleAnimation == 1 then
+            IdleAnim01()
+        elseif randIdleAnimation == 2 then
+            IdleAnim02()
+        end
+        idleAnim = false
     end
 end
 
@@ -304,18 +304,18 @@ end
 local RESTORE_DELAY = Spring.UnitScript.GetLongestReloadTime(unitID) * 2
 
 local function RestoreAfterDelay()
-	SetSignalMask(SIG_AIM + SIG_DYING)
-	Sleep(RESTORE_DELAY)
-	WeaponReady()
-	return 0
+    SetSignalMask(SIG_AIM + SIG_DYING)
+    Sleep(RESTORE_DELAY)
+    WeaponReady()
+    return 0
 end
 
 function script.AimFromWeapon1()
-	return gun
+    return gun
 end
 
 function script.QueryWeapon1()
-	return flare
+    return flare
 end
 
 function script.FireWeapon1()
@@ -323,16 +323,16 @@ function script.FireWeapon1()
         return
     end
 
-	if BURST_RATE1 then
-		local counter = 1
-		while counter <= BURST1 do
-			EmitSfx(flare, MUZZLEFLASH1)
-			counter = counter + 1
-			Sleep(BURST_RATE1)
-		end
-	else
-		EmitSfx(flare, MUZZLEFLASH1)
-	end
+    if BURST_RATE1 then
+        local counter = 1
+        while counter <= BURST1 do
+            EmitSfx(flare, MUZZLEFLASH1)
+            counter = counter + 1
+            Sleep(BURST_RATE1)
+        end
+    else
+        EmitSfx(flare, MUZZLEFLASH1)
+    end
 end
 
 function script.AimWeapon1(heading, pitch)
@@ -340,8 +340,8 @@ function script.AimWeapon1(heading, pitch)
         return
     end
 
-	Signal(SIG_AIM)
-	SetSignalMask(SIG_AIM + SIG_DYING)
+    Signal(SIG_AIM)
+    SetSignalMask(SIG_AIM + SIG_DYING)
 
     if inBunker == 1 then
         -- He is building process, skip aiming
@@ -367,5 +367,5 @@ function CanCapture(useless_data)
         return false
     end
 
-	return not alreadyEngaged
+    return not alreadyEngaged
 end

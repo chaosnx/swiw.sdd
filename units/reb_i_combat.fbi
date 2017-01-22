@@ -6,6 +6,7 @@
 	icontype=inf_medium;
 	soundcategory=reb-i-trooper;
 	category=GROUND INFANTRY;
+    script=reb_i_combat.lua;
 
 	name=Combat Trooper;
 	description=Rebel Combat Infantry;
@@ -51,7 +52,6 @@
 	onlytargetcategory1=GROUND VTOL;
 	weaponmaindir1=0 0 1;
 	maxangledif1=190;
-	weapon2=reb_i_combat;
 	[sfxtypes]
 	{
 		explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_RED;
