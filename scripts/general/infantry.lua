@@ -146,7 +146,7 @@ end
 
 local function Stop()
     Signal(SIG_IDLE_RUN)
-    SetSignalMask(SIG_IDLE_RUN + SIG_DYING)
+    SetSignalMask(SIG_IDLE_RUN + SIG_DYING + SIG_AIM)
 
     WeaponReady()
     while true do
