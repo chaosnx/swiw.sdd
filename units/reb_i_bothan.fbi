@@ -1,7 +1,7 @@
 [unitinfo]
 {
 	unitname=reb_i_bothan;
-	objectname=rebel/i-bothan.s3o;
+	objectname=rebel/i-bothan.dae;
 	buildpic=reb_i_bothan.png;
 	corpse=reb_i_bothan_dead;
 	icontype=inf_scout;

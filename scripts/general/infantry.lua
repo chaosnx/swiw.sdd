@@ -344,7 +344,7 @@ function script.AimWeapon1(heading, pitch)
     SetSignalMask(SIG_AIM + SIG_DYING)
 
     if inBunker == 1 then
-        -- He is building process, skip aiming
+        -- He is in building process, skip aiming
         return false
     end
 
