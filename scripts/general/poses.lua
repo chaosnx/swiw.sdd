@@ -12,4 +12,6 @@ elseif USE_STANCE == RIFLE_STANCE2 then
 elseif USE_STANCE == WOOKIEE_STANCE then
     include "general/wookiee_poses.lua"
 elseif USE_STANCE == SBD_STANCE then
+elseif USE_STANCE == SPY_STANCE then
+    include "general/spy_poses.lua"
 end

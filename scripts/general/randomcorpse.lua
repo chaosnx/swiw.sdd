@@ -49,6 +49,8 @@ Put the following #defines in your script:
 
 function script.Killed(recentDamage, maxHealth)
     Signal(SIG_DYING)
+    Spring.SetUnitAlwaysVisible(unitID, true)
+
     local severity = recentDamage / maxHealth * 100
 
     if USES_BMOVING then

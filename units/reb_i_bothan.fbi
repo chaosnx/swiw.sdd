@@ -3,10 +3,10 @@
 	unitname=reb_i_bothan;
 	objectname=rebel/i-bothan.dae;
 	buildpic=reb_i_bothan.png;
-	corpse=reb_i_bothan_dead;
 	icontype=inf_scout;
 	soundcategory=reb-i-trooper;
 	category=GROUND INFANTRY;
+	script=reb_i_bothan.lua;
 
 	name=Bothan Spy;
 	description=Bothan Spy. Can call in commandos;

@@ -33,9 +33,16 @@ function WeaponReady()
     alreadyEngaged = false
     STEADY_POSE()
 
-    runSpeed = NORMAL_SPEED
-    Spring.MoveCtrl.SetGroundMoveTypeData(unitID, "maxSpeed", maxSpeed)
-    maxAngle = NORMAL_MAX_ANGLE
+    local cloaked = Spring.GetUnitIsCloaked(unitID)
+    if(Spring.GetUnitIsCloaked(unitID)) then
+        Spring.MoveCtrl.SetGroundMoveTypeData(unitID, "maxSpeed", CLOAK_MAX_SPEED)
+        maxAngle = CLOAK_MAX_ANGLE
+        runSpeed = CLOAK_SPEED
+    else
+        Spring.MoveCtrl.SetGroundMoveTypeData(unitID, "maxSpeed", maxSpeed)
+        maxAngle = NORMAL_MAX_ANGLE
+        runSpeed = NORMAL_SPEED
+    end
     return 0
 end
 
@@ -56,14 +63,19 @@ local function Run()
         end
     end
 
+    local y = y_axis
+    if Z_UP then
+        y = z_axis
+    end
+
     Turn(pelvis, x_axis, math.rad(8 * maxAngle) / 100, math.rad(80 * runSpeed))
     Turn(torso, x_axis, math.rad(4 * maxAngle) / 100, math.rad(80 * runSpeed))
     while true do
         if bMoving then
             -- Turn(pelvis, x_axis, math.rad(8 * maxAngle) / 100, math.rad(80 * runSpeed))
             -- Turn(torso, x_axis, math.rad(4 * maxAngle) / 100, math.rad(80 * runSpeed))
-            Turn(torso, y_axis, math.rad(-20 * maxAngle) / 100, math.rad(10 * runSpeed))
-            Move(pelvis, y_axis, 0, math.rad(200) * runSpeed)
+            Turn(torso, y, math.rad(-20 * maxAngle) / 100, math.rad(10 * runSpeed))
+            Move(pelvis, y, 0, math.rad(200) * runSpeed)
             -- WaitForTurn(pelvis, x_axis)
             -- WaitForTurn(torso, x_axis)
             -- WaitForTurn(torso, y_axis)
@@ -73,11 +85,11 @@ local function Run()
             Turn(rleg, x_axis, math.rad(85 * maxAngle) / 100, math.rad(30 * runSpeed))
             Turn(lleg, x_axis, math.rad(25 * maxAngle) / 100, math.rad(40 * runSpeed))
             Turn(rthigh, x_axis, math.rad(-45 * maxAngle) / 100, math.rad(20 * runSpeed))
-            Turn(rthigh, y_axis, math.rad(0 * maxAngle) / 100, math.rad(20 * runSpeed))
-            Turn(rthigh, z_axis, math.rad(0 * maxAngle) / 100, math.rad(20 * runSpeed))
+            Turn(rthigh, y_axis, 0, math.rad(20 * runSpeed))
+            Turn(rthigh, z_axis, 0, math.rad(20 * runSpeed))
             Turn(lthigh, x_axis, math.rad(20 * maxAngle) / 100, math.rad(20 * runSpeed))
-            Turn(lthigh, y_axis, math.rad(0 * maxAngle) / 100, math.rad(20 * runSpeed))
-            Turn(lthigh, z_axis, math.rad(0 * maxAngle) / 100, math.rad(20 * runSpeed))
+            Turn(lthigh, y_axis, 0, math.rad(20 * runSpeed))
+            Turn(lthigh, z_axis, 0, math.rad(20 * runSpeed))
             Move(pelvis, y_axis, 1.75, math.rad(160) * runSpeed)
             WaitForTurn(rleg, x_axis)
             WaitForTurn(lleg, x_axis)
@@ -92,8 +104,8 @@ local function Run()
 
         if bMoving then
             Turn(rleg, x_axis, math.rad(55 * maxAngle) / 100, math.rad(60 * runSpeed))
-            Turn(torso, y_axis, math.rad(20 * maxAngle) / 100, math.rad(10 * runSpeed))
-            Move(pelvis, y_axis, 0, math.rad(300) * runSpeed)
+            Turn(torso, y, math.rad(20 * maxAngle) / 100, math.rad(10 * runSpeed))
+            Move(pelvis, y, 0, math.rad(300) * runSpeed)
             Turn(lleg, x_axis, math.rad(85 * maxAngle) / 100, math.rad(30 * runSpeed))
             Turn(rleg, x_axis, math.rad(25 * maxAngle) / 100, math.rad(40 * runSpeed))
             Turn(lthigh, x_axis, math.rad(-45 * maxAngle) / 100, math.rad(20 * runSpeed))
@@ -106,7 +118,7 @@ local function Run()
         end
         if bMoving then
             Turn(rthigh, x_axis, math.rad(20 * maxAngle) / 100, math.rad(30 * runSpeed))
-            Move(pelvis, y_axis, 1.75, math.rad(160) * runSpeed)
+            Move(pelvis, y, 1.75, math.rad(160) * runSpeed)
             Turn(lleg, x_axis, math.rad(55 * maxAngle) / 100, math.rad(60 * runSpeed))
             WaitForTurn(rthigh, x_axis)
             -- WaitForMove(pelvis, y_axis)
@@ -117,30 +129,38 @@ local function Run()
 end
 
 local function IdleAnim01()
+    local y = y_axis
+    if Z_UP then
+        y = z_axis
+    end
     local randvar = math.random(8, 20)
-    Turn(torso, y_axis, math.rad(1 * randvar), math.rad(50))
-    Turn(head, y_axis, math.rad(1 * randvar), math.rad(90))
-    WaitForTurn(torso, y_axis)
-    WaitForTurn(head, y_axis)
+    Turn(torso, y, math.rad(1 * randvar), math.rad(50))
+    Turn(head, y, math.rad(1 * randvar), math.rad(90))
+    WaitForTurn(torso, y)
+    WaitForTurn(head, y)
     Sleep(12 * randvar)
-    Turn(torso, y_axis, math.rad(1 * randvar), math.rad(50))
-    Turn(head, y_axis, math.rad(1 * randvar), math.rad(90))
+    Turn(torso, y, math.rad(1 * randvar), math.rad(50))
+    Turn(head, y, math.rad(1 * randvar), math.rad(90))
     WaitForTurn(torso, y_axis)
     WaitForTurn(head, y_axis)
     Sleep(12 * randvar)
 end
 
 local function IdleAnim02()
+    local y = y_axis
+    if Z_UP then
+        y = z_axis
+    end
     local randvar = math.random(8, 20)
-    Turn(torso, y_axis, math.rad(-1 * randvar), math.rad(50))
-    Turn(head, y_axis, math.rad(-1 * randvar), math.rad(90))
-    WaitForTurn(torso, y_axis)
-    WaitForTurn(head, y_axis)
+    Turn(torso, y, math.rad(-1 * randvar), math.rad(50))
+    Turn(head, y, math.rad(-1 * randvar), math.rad(90))
+    WaitForTurn(torso, y)
+    WaitForTurn(head, y)
     Sleep(12 * randvar)
-    Turn(torso, y_axis, math.rad(-1 * randvar), math.rad(50))
-    Turn(head, y_axis, math.rad(-1 * randvar), math.rad(90))
-    WaitForTurn(torso, y_axis)
-    WaitForTurn(head, y_axis)
+    Turn(torso, y, math.rad(-1 * randvar), math.rad(50))
+    Turn(head, y, math.rad(-1 * randvar), math.rad(90))
+    WaitForTurn(torso, y)
+    WaitForTurn(head, y)
     Sleep(12 * randvar)
 end
 
