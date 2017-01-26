@@ -112,7 +112,7 @@ gadget.unitBuildOrder = UnitBag{
 	},
 	imp_b_barracks = UnitArray{
 		"imp_is_assault", "imp_is_defense",
-		"imp_c_condroid", "imp_d_antiair",
+		"imp_c_condroid", "imp_is_antiair",
 		"imp_is_defense", "imp_is_heavy",
 		"imp_is_defense", "imp_is_assault",
 		"imp_w_atrt", "imp_is_assault",
