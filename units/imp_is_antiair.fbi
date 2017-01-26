@@ -1,9 +1,10 @@
 [unitinfo]
 {
 	unitname=imp_is_defense;
-	objectname=nullpoint.s3o;
+	objectname=nullpoint.obj;
 	buildpic=imp_is_antiair.png;
 	category=GROUND;
+    script=imp_is.lua;
 
 	name=Anti Air Squad;
 	description=5xRocket trooper, 1xStormtrooper;

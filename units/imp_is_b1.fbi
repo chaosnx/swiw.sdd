@@ -1,9 +1,10 @@
 [unitinfo]
 {
 	unitname=imp_is_b1;
-	objectname=nullpoint.s3o;
+	objectname=nullpoint.obj;
 	buildpic=imp_i_battledroid.png;
 	category=GROUND;
+    script=imp_is.lua;
 
 	name=Battle Droid Batch Order;
 	description=6 X B1 Battledroid;

@@ -1,9 +1,10 @@
 [unitinfo]
 {
 	unitname=imp_is_defense;
-	objectname=nullpoint.s3o;
+	objectname=nullpoint.obj;
 	buildpic=imp_is_defense.png;
 	category=GROUND;
+    script=imp_is.lua;
 
 	name=Defense Squad;
 	description=2xRepeater trooper, 2xE-WEB;

@@ -1,9 +1,10 @@
 [unitinfo]
 {
 	unitname=imp_is_scout;
-	objectname=nullpoint.s3o;
+	objectname=nullpoint.obj;
 	buildpic=imp_is_scout.png;
 	category=GROUND;
+    script=imp_is.lua;
 
 	name=Scout Squad;
 	description=2xSpeeder bike, 2xScout trooper;

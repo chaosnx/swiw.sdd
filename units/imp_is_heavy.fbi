@@ -1,9 +1,10 @@
 [unitinfo]
 {
 	unitname=imp_is_heavy;
-	objectname=nullpoint.s3o;
+	objectname=nullpoint.obj;
 	buildpic=imp_is_heavy.png;
 	category=GROUND;
+    script=imp_is.lua;
 
 	name=Heavy Squad;
 	description=4xFlametrooper, 2xRepeater trooper;

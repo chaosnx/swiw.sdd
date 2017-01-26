@@ -1,9 +1,10 @@
 [unitinfo]
 {
 	unitname=imp_is_assault;
-	objectname=nullpoint.s3o;
+	objectname=nullpoint.obj;
 	buildpic=imp_is_assault.png;
 	category=GROUND;
+    script=imp_is.lua;
 
 	name=Assault Squad;
 	description=5xStormtrooper, 3xRepeater trooper;

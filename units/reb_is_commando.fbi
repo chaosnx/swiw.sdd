@@ -1,7 +1,7 @@
 [unitinfo]
 {
 	unitname=reb_is_commando;
-	objectname=nullpoint.s3o;
+	objectname=nullpoint.obj;
 	buildpic=reb_is_balanced.png;
 	icontype=inf_heavy;
 	category=GROUND;
