@@ -6,6 +6,7 @@
 	icontype=air_trans;
 	soundcategory=Reb_Hover_Light;
 	category=VTOL TAKESGROUNDFIRE;
+	script=reb_a_transport.lua;
 
 	name=Cargo Hauler;
 	description=Corellian Air Transport;
