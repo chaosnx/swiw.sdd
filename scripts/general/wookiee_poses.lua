@@ -1,5 +1,7 @@
 local N_POSES = 3
-local USE_POSE = math.random(1, N_POSES)
+if USE_POS == nil then
+    USE_POSE = math.random(1, N_POSES)
+end
 
 
 function STEADY_POSE(heading, pitch)

@@ -1,5 +1,5 @@
 local N_POSES = 2
-if USE_POS ~= nil then
+if USE_POS == nil then
     USE_POSE = math.random(1, N_POSES)
 end
 
