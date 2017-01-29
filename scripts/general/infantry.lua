@@ -195,6 +195,7 @@ function script.StopMoving()
     end
     bMoving = false
     StartThread(Stop)
+    local x, y, z = Spring.GetUnitBasePosition(unitID)
 end
 
 function script.HitByWeaponId(z, x, id, damage)
@@ -331,7 +332,7 @@ local function RestoreAfterDelay()
 end
 
 function script.AimFromWeapon1()
-    return gun
+    return head
 end
 
 function script.QueryWeapon1()

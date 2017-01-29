@@ -5,7 +5,7 @@
     buildpic=reb_sc_swoop.png;
     icontype=veh_scout;
     soundcategory=imp-sc-swoop;
-    category=ALL HOVER WEAPON NOTSUB NOTAIR SURFACE;
+    category=VTOL GROUND;
     script=reb_sc_swoop.lua;
 
     name=Swoop;
