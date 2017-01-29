@@ -31,6 +31,7 @@ DUSTFXPT2 = lwing
 include "general/rebel_unit_build.lua"
 
 PLACES = {l1, l2}
+LAND_DELAY = 7000
 DROP_DELAY = 0
 DROP_OFFSET = {0.0, 40.0}
 include "general/air_transport.lua"

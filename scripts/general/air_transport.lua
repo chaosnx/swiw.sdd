@@ -5,6 +5,9 @@ following global variables:
    loaded/unloaded. 100 by default
    * DROP_OFFSET : The unloading point respect the center of the transport (just
    x and zcoordinates are required). {0, 0} by default
+   * LAND_DELAY : Lag between the time instant we detect the drop may start, and
+   the one the units drop actually starts. This time can be used to let the
+   transport become closer to the ground. 5000 by default
    * DROP_DELAY : Delay between units drop. 1500 by default
 Optionally, you can define the following functions to control the behavior:
    * BEGIN_TRANSPORT(paxID) : Called when an unit is loaded. Useful to make
@@ -27,6 +30,9 @@ if NEAR_DIST == nil then
 end
 if DROP_OFFSET == nil then
     DROP_OFFSET = {0, 0}
+end
+if LAND_DELAY == nil then
+    LAND_DELAY = 5000
 end
 if DROP_DELAY == nil then
     DROP_DELAY = 1500
@@ -223,7 +229,7 @@ function PickupAndDropFixer()
 
         if isUnloading() then
             -- We are not moving (but we should wait to land)
-            Sleep(7000)
+            Sleep(LAND_DELAY)
             
             -- Get the drop point
             dropPoint = getDropPoint()
