@@ -43,16 +43,16 @@
 	explodeas=IMP_HUMAN_BLAST;
 	selfdestructas=IMP_HUMAN_BLAST;
 
-	nochasecategory=VTOL;
+	nochasecategory=AIR;
 
 	weapon1=old_i_clonetrooper;
-	badtargetcategory1=VTOL;
-	onlytargetcategory1=GROUND VTOL;
+	badtargetcategory1=AIR;
+	onlytargetcategory1=GROUND TAKESGROUNDFIRE;
 	weaponmaindir1=0 0 1;
 	maxangledif1=190;
 	weapon2=old_i_clonetrooper;
-	badtargetcategory2=VTOL;
-	onlytargetcategory2=GROUND VTOL;
+	badtargetcategory2=AIR;
+	onlytargetcategory2=GROUND TAKESGROUNDFIRE;
 	[sfxtypes]
 	{
 		explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_BLUE;

@@ -46,10 +46,11 @@
     explodeas=REB_HUMAN_BLAST;
     selfdestructas=REB_HUMAN_BLAST;
 
-    nochasecategory=VTOL;
+    nochasecategory=TAKESGROUNDFIRE;
 
     weapon1=reb_i_trooper;
-    onlytargetcategory1=GROUND VTOL;
+    badtargetcategory1=TAKESGROUNDFIRE;
+    onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
     [sfxtypes]

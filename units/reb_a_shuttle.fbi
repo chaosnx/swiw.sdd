@@ -5,7 +5,7 @@
     buildpic=reb_a_shuttle.png;
     icontype=air_trans;
     soundcategory=reb-a-vwing;
-    category=VTOL TAKESGROUNDFIRE;
+    category=AIR TAKESGROUNDFIRE;
     script=reb_a_shuttle.lua;
 
     name=Air Shuttle;

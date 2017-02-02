@@ -50,7 +50,7 @@
     selfdestructas=REB_HUMAN_BLAST;
 
     weapon1=reb_i_sniper;
-    onlytargetcategory1=GROUND;
+    onlytargetcategory1=INFANTRY;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
     [sfxtypes]

@@ -55,7 +55,7 @@
 }
 [imp_artillery_nullgun]
 {
-	model=nullpoint.s3o;
+	model=nullpoint.obj;
 	rendertype=4;
 	turret=1;
 	tolerance=100;
