@@ -6,6 +6,7 @@ end
 if USE_STANCE == PISTOL_STANCE1 then
     include "general/pistol_poses.lua"
 elseif USE_STANCE == ROCKET_STANCE1 then
+    include "general/rocket1_poses.lua"
 elseif USE_STANCE == RIFLE_STANCE1 then
 elseif USE_STANCE == RIFLE_STANCE2 then
     include "general/rifle2_poses.lua"
