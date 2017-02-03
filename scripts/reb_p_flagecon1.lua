@@ -23,17 +23,17 @@ local smoke = SFX.CEG+0
 local SIG_ACTIVATED = 4
 
 function script.Create()
-    Turn(base, y-axis, math.random(math.rad(-20), math.rad(20)))
-    Turn(crates, y-axis, math.random(math.rad(-160), math.rad(160)))
-    Turn(c1, y-axis, math.random(math.rad(-40), math.rad(160)))
-    Turn(c2, y-axis, math.random(0.0, math.rad(70)))
-    Turn(c3, y-axis, math.random(math.rad(-50), 0.0))
+    Turn(base, y_axis, math.random(math.rad(-20), math.rad(20)))
+    Turn(crates, y_axis, math.random(math.rad(-160), math.rad(160)))
+    Turn(c1, y_axis, math.random(math.rad(-40), math.rad(160)))
+    Turn(c2, y_axis, math.random(0.0, math.rad(70)))
+    Turn(c3, y_axis, math.random(math.rad(-50), 0.0))
     StartThread(StartSmoke)
     StartThread(SmokeUnit_SWS)
 end
 
 
-local function StartSmoke()
+function StartSmoke()
     SetSignalMask(SIG_ACTIVATED)
 
     while true do
@@ -42,7 +42,7 @@ local function StartSmoke()
     end
 end
 
-local function StopSmoke()
+function StopSmoke()
     Signal(SIG_ACTIVATED)
 end
 
