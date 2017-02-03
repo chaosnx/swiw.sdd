@@ -52,7 +52,7 @@
     weaponmaindir1=0 0 1;
     maxangledif1=100;
     weapon2=old_v_tx130laser;
-    badtargetcategory2=INFANTRY;
+    badtargetcategory2=TANK;
     onlytargetcategory2=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {

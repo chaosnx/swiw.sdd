@@ -47,10 +47,11 @@
     selfdestructas=SMALL_UNIT;
 
     weapon1=cis_i_droidekalaser;
+    badtargetcategory1=TANK;
     onlytargetcategory1=GROUND;
     weapon2=cis_i_droidekashield;
     weapon3=cis_i_droidekarange;
-    badtargetcategory3=AIR;
+    badtargetcategory3=AIR TANK;
     onlytargetcategory3=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {

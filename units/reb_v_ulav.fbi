@@ -50,10 +50,10 @@
     nochasecategory=AIR;
 
     weapon1=reb_v_ulavlaser;
-    badtargetcategory1=TAKESGROUNDFIRE;
+    badtargetcategory1=AIR;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weapon2=reb_v_ulavstunner;
-    onlytargetcategory2=IONTARGETABLE;
+    onlytargetcategory2=IONTARGETABLE TANK;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;

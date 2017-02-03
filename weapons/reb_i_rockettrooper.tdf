@@ -50,9 +50,9 @@
 
     [damage]
     {
-        default=22;
+        default=60;
         no_armor=22;
-        light_armor=22;
+        light_armor=60;
         medium_armor=22;
         heavy_armor=22;
         ion_damage=22;

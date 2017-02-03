@@ -50,8 +50,7 @@
     selfdestructas=TIE_BLAST;
 
     weapon1=reb_a_z95;
-    badtargetcategory1=GROUND;
-    onlytargetcategory1=GROUND AIR;
+    onlytargetcategory1=IONTARGETABLE TANK;
     weapon2=reb_a_z95_laser;
     badtargetcategory2=GROUND;
     onlytargetcategory2=GROUND AIR;

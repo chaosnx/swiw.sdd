@@ -48,7 +48,7 @@
     nochasecategory=AIR;
 
     weapon1=reb_w_espo;
-    badtargetcategory1=TAKESGROUNDFIRE;
+    badtargetcategory1=AIR;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=80;

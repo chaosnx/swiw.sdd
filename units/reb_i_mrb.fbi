@@ -51,7 +51,7 @@
     nochasecategory=GROUND TAKESGROUNDFIRE;
 
     weapon1=reb_i_mrb;
-    badtargetcategory1=TAKESGROUNDFIRE;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {

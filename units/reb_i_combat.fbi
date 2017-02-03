@@ -49,7 +49,7 @@
     nochasecategory=TAKESGROUNDFIRE;
 
     weapon1=reb_i_combat;
-    badtargetcategory1=TAKESGROUNDFIRE;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=190;

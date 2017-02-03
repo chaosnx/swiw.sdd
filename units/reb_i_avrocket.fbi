@@ -45,6 +45,7 @@
     selfdestructas=REB_HUMAN_BLAST;
 
     weapon1=reb_i_avrocket;
+    badtargetcategory1=INFANTRY;
     onlytargetcategory1=GROUND;
     [sfxtypes]
     {

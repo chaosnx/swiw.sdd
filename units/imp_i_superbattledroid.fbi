@@ -47,7 +47,7 @@
     nochasecategory=AIR;
 
     weapon1=cis_i_superbattledroidlaser;
-    badtargetcategory1=AIR;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=100;

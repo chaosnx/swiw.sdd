@@ -51,16 +51,11 @@
 
     weapon1=reb_a_ywing;
     onlytargetcategory1=GROUND;
-    weapon2=reb_a_laser;
+    weapon2=reb_a_ywinglaser;
     badtargetcategory2=AIR;
     onlytargetcategory2=GROUND AIR;
-    weaponmaindir2=0 0 1;
-    maxangledif2=60;
-    weapon3=reb_a_ywinglaser;
-    badtargetcategory3=AIR;
-    onlytargetcategory3=GROUND AIR;
-    weaponmaindir3=0 1 0;
-    maxangledif3=220;
+    weaponmaindir2=0 1 0;
+    maxangledif2=220;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;

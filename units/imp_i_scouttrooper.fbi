@@ -46,12 +46,12 @@
     nochasecategory=AIR;
 
     weapon1=imp_i_scouttrooper;
-    badtargetcategory1=AIR;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
     weapon2=imp_i_scouttrooper;
-    badtargetcategory2=AIR;
+    badtargetcategory2=AIR TANK;
     onlytargetcategory2=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {

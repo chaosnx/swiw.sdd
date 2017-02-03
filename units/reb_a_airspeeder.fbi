@@ -51,7 +51,7 @@
     nochasecategory=AIR;
 
     weapon1=reb_a_airspeeder;
-    badtargetcategory1=AIR;
+    badtargetcategory1=INFANTRY DROID;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=160;

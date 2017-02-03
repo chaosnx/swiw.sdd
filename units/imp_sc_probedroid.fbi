@@ -49,6 +49,7 @@
     selfdestructas=MEDIUM_BUILDING;
 
     weapon1=imp_sc_probedroid;
+    badtargetcategory1=TANK;
     onlytargetcategory1=GROUND;
     [sfxtypes]
     {

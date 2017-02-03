@@ -49,8 +49,10 @@
     nochasecategory=VTOL;
 
     weapon1=imp_i_eweb;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weapon2=imp_i_eweb;
+    badtargetcategory2=AIR TANK;
     onlytargetcategory2=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {

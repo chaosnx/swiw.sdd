@@ -47,6 +47,7 @@
     selfdestructas=CIS_STAP_BLAST;
 
     weapon1=cis_sc_stap;
+    badtargetcategory1=TANK;
     onlytargetcategory1=GROUND;
     weaponmaindir1=0 0 1;
     maxangledif1=80;

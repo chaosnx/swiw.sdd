@@ -49,7 +49,7 @@
     nochasecategory=AIR;
 
     weapon1=cis_i_battledroidlaser;
-    badtargetcategory1=AIR;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {

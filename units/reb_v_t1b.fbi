@@ -49,7 +49,7 @@
     nochasecategory=AIR;
 
     weapon1=reb_v_t1bcannon;
-    badtargetcategory1=TAKESGROUNDFIRE;
+    badtargetcategory1=AIR;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weapon2=reb_v_t1bmissile;
     onlytargetcategory2=AIR;

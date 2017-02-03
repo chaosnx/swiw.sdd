@@ -45,10 +45,10 @@
     explodeas=REB_HUMAN_BLAST;
     selfdestructas=REB_HUMAN_BLAST;
 
-    nochasecategory=TAKESGROUNDFIRE;
+    nochasecategory=AIR;
 
     weapon1=reb_i_wookiee;
-    badtargetcategory1=TAKESGROUNDFIRE;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=190;

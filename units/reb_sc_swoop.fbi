@@ -53,6 +53,7 @@
     selfdestructas=TIE_BLAST;
 
     weapon1=imp_sc_speederbike;
+    badtargetcategory1=TANK;
     onlytargetcategory1=GROUND;
     weaponmaindir1=0 0 1;
     maxangledif1=200;

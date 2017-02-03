@@ -64,7 +64,7 @@
     nochasecategory=AIR;
 
     weapon1=old_v_tx130laser;
-    badtargetcategory1=AIR;
+    badtargetcategory1=AIR TANK;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {

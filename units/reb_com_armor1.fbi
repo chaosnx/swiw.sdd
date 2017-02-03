@@ -67,18 +67,18 @@
     badtargetcategory=VTOL;
 
     weapon1=reb_commander_repeater;
-    onlytargetcategory1=GROUND VTOL;
-    badtargetcategory1=VTOL;
+    onlytargetcategory1=GROUND TAKESGROUNDFIRE;
+    badtargetcategory1=TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=170;
     weapon2=reb_i_veterantrooperlaser;
-    onlytargetcategory2=GROUND VTOL;
-    badtargetcategory2=VTOL;
+    onlytargetcategory2=GROUND TAKESGROUNDFIRE;
+    badtargetcategory2=TAKESGROUNDFIRE;
     weaponmaindir2=-1 0 0;
     maxangledif2=170;
     weapon3=reb_i_veterantrooperlaser;
-    onlytargetcategory3=GROUND VTOL;
-    badtargetcategory3=VTOL;
+    onlytargetcategory3=GROUND TAKESGROUNDFIRE;
+    badtargetcategory3=TAKESGROUNDFIRE;
     weaponmaindir3=1 0 0;
     maxangledif3=170;
     [sfxtypes]
