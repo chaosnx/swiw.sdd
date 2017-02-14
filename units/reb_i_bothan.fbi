@@ -29,9 +29,10 @@
     stealth=1;
     seismicdistance=1200;
 
+    cancloak=1;
     cloakcost=5;
     cloakcostmoving=10;
-    mincloakdistance=0;
+    mincloakdistance=170;
     initcloaked=1;
 
     builder=1;

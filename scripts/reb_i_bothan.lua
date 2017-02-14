@@ -76,12 +76,10 @@ function script.StartBuilding()
     end
 
     SetUnitValue(COB.INBUILDSTANCE, 1)
-    Spring.SetUnitAlwaysVisible(unitID, true)
 end
 
 function script.StopBuilding()
     SetUnitValue(COB.INBUILDSTANCE, 0)
-    Spring.SetUnitAlwaysVisible(unitID, false)
 end
 
 CORPSES = {"reb_i_bothan_dead"}
