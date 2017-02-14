@@ -52,8 +52,7 @@
     selfdestructas=REB_HUMAN_BLAST;
 
     weapon1=reb_i_avrocket;
-    badtargetcategory1=INFANTRY;
-    onlytargetcategory1=GROUND;
+    onlytargetcategory1=TANK;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_RED;
