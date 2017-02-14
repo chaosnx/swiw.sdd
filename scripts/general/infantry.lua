@@ -185,6 +185,11 @@ function script.StartMoving()
     if Spring.GetUnitIsDead(unitID) then
         return
     end
+    if DECLOAK_WHILE_MOVING then
+        -- To decloak the unit, just simply increase the cloaking radius to a
+        -- very big value
+        Spring.SetUnitCloak(unitID, Spring.GetUnitIsCloaked(unitID), 1000000000)
+    end
     bMoving = true
     StartThread(Run)
 end
@@ -192,6 +197,12 @@ end
 function script.StopMoving()
     if Spring.GetUnitIsDead(unitID) then
         return
+    end
+    if DECLOAK_WHILE_MOVING then
+        ud = UnitDefs[unitDefID]
+        Spring.SetUnitCloak(unitID,
+                            Spring.GetUnitIsCloaked(unitID),
+                            tonumber(ud.customParams.decloakdistance))
     end
     bMoving = false
     StartThread(Stop)

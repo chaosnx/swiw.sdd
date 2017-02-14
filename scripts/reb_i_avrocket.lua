@@ -36,6 +36,10 @@ NORMAL_SPEED = 14
 NORMAL_MAX_ANGLE = 150
 SLOW_SPEED = 7
 SLOW_MAX_ANGLE = 77
+CLOAK_MAX_SPEED = Spring.GetUnitMoveTypeData(unitID).maxSpeed
+CLOAK_SPEED = NORMAL_SPEED
+CLOAK_MAX_ANGLE = NORMAL_MAX_ANGLE
+DECLOAK_WHILE_MOVING = true
 MUZZLEFLASH1 = SFX.CEG+0
 include "general/infantry.lua"
 include "general/rebel_randomhead.lua"
@@ -45,6 +49,7 @@ function script.Create()
     bMoving = false
     randomSeed = math.random(10, 60)
     maxSpeed = Spring.GetUnitMoveTypeData(unitID).maxSpeed
+    CLOAK_MAX_SPEED = maxSpeed
     WeaponReady()
 end
 
