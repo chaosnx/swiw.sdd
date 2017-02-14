@@ -8,4 +8,5 @@
 	footprintx=1;
 	footprintz=1;
 	reclaimable=0;
+    smokeTime=0;
 }
