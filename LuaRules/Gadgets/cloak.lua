@@ -18,7 +18,7 @@ local GetUnitPosition = Spring.GetUnitPosition
 local GetUnitsInCylinder = Spring.GetUnitsInCylinder
 local GetUnitStates = Spring.GetUnitStates
 local SetUnitCloak = Spring.SetUnitCloak
-local SetUnitSensorRadius = SetUnitSensorRadius
+local SetUnitSensorRadius = Spring.SetUnitSensorRadius
 local AreTeamsAllied = Spring.AreTeamsAllied
 
 if (gadgetHandler:IsSyncedCode()) then
