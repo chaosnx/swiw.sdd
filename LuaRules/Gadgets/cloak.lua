@@ -18,6 +18,7 @@ local GetUnitPosition = Spring.GetUnitPosition
 local GetUnitsInCylinder = Spring.GetUnitsInCylinder
 local GetUnitStates = Spring.GetUnitStates
 local SetUnitCloak = Spring.SetUnitCloak
+local GetUnitIsCloaked = Spring.GetUnitIsCloaked
 local SetUnitSensorRadius = Spring.SetUnitSensorRadius
 local AreTeamsAllied = Spring.AreTeamsAllied
 
@@ -97,7 +98,7 @@ function gadget:GameFrame(n)
 
             -- Eventually modify the sight distance
             if(ud.customParams.cloaksightdistance ~= nil) then
-                if(cloakingUnits[uid].cloaked) then
+                if(GetUnitIsCloaked(uid)) then
                     SetUnitSensorRadius(uid, "los", tonumber(ud.customParams.cloaksightdistance))
                 else
                     SetUnitSensorRadius(uid, "los", tonumber(ud.losRadius))
