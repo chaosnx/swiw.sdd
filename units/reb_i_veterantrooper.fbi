@@ -6,6 +6,7 @@
     icontype=inf_medium;
     soundcategory=reb-i-commando;
     category=GROUND INFANTRY;
+    script=reb_i_veterantrooper.lua;
 
     name=Commando;
     description=Alliance Commando;
@@ -57,7 +58,6 @@
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
-    weapon2=reb_i_veterantrooperlaser;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_RED;
@@ -65,5 +65,6 @@
     [customparams]
     {
         decloakdistance=165;
+        cloaksightdistance=50;
     }
 }

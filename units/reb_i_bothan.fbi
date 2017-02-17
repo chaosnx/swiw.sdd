@@ -71,6 +71,7 @@
     [customparams]
     {
         decloakdistance=170;
+        cloaksightdistance=450;
     }
 }
 

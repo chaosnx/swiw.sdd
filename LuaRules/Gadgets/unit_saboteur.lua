@@ -146,8 +146,13 @@ local function StartPlant(unitID, unitID2)
   end
 
   -- call cob
-  CallCOBScript(unitID, 'StartPlantBomb', 0);
-  --CallCOBScript(unitID, 'StartBuilding', 0, 1);
+  local env = Spring.UnitScript.GetScriptEnv(unitID)
+  if env == nil then
+    CallCOBScript(unitID, "StartPlantBomb", 0)
+    -- CallCOBScript(unitID, 'StartBuilding', 0, 1);
+  else
+    Spring.UnitScript.CallAsUnit(unitID, env.StartPlantBomb)
+  end
 
   -- set units
   local newBombData    = {};
@@ -173,7 +178,12 @@ end
 
 local function FinishPlant(unitID, bombInfo)
   --CallCOBScript(bombInfo.unit, 'BombPlanted', 0);
-  CallCOBScript(unitID, 'StopPlantBomb', 0);
+  local env = Spring.UnitScript.GetScriptEnv(unitID)
+  if env == nil then
+    CallCOBScript(unitID, "StopPlantBomb", 0)
+  else
+    Spring.UnitScript.CallAsUnit(unitID, env.StopPlantBomb)
+  end
 
   UnitBombs[bombInfo.unit] = _countdown;
   PlantBombs[unitID]       = nil;
@@ -183,7 +193,12 @@ local function FinishPlant(unitID, bombInfo)
 end
 
 local function StopPlant(unitID)
-  CallCOBScript(unitID, 'StopPlantBomb', 0);
+  local env = Spring.UnitScript.GetScriptEnv(unitID)
+  if env == nil then
+    CallCOBScript(unitID, "StopPlantBomb", 0)
+  else
+    Spring.UnitScript.CallAsUnit(unitID, env.StopPlantBomb)
+  end
 
   BombPlants[ PlantBombs[unitID] or -1 ] = nil;
   PlantBombs[unitID] = nil;
