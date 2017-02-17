@@ -29,7 +29,7 @@
 
     energyuse=8;
 
-    sightdistance=500;
+    sightdistance=300;
 
     canmove=1;
     movementclass=HOVER3x3;
