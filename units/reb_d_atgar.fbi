@@ -30,7 +30,7 @@
 
     energystorage=100;
 
-    sightdistance=400;
+    sightdistance=300;
 
     maxslope=20;
 
@@ -45,8 +45,7 @@
     selfdestructas=SMALL_BUILDING;
 
     weapon1=reb_d_atgar;
-    badtargetcategory1=INFANTRY;
-    onlytargetcategory1=GROUND TAKESGROUNDFIRE;
+    onlytargetcategory1=TANK WALKER TAKESGROUNDFIRE;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;

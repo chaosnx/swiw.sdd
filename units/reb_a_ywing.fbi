@@ -28,7 +28,7 @@
     shownanoframe=0;
     collisionspherescale=1.0;
 
-    sightdistance=550;
+    sightdistance=200;
 
     canmove=1;
     maxvelocity=4.8;
