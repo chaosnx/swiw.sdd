@@ -6,6 +6,7 @@
     icontype=inf_medium;
     soundcategory=imp-i-stormtrooper;
     category=GROUND INFANTRY;
+    script=imp_i_stormtrooper.lua;
 
     name=Stormtrooper;
     description=Imperial Soldier;
@@ -51,9 +52,6 @@
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
-    weapon2=imp_i_stormtrooper;
-    badtargetcategory2=AIR TANK;
-    onlytargetcategory2=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_RED;
