@@ -27,7 +27,6 @@ randHead = 1
 idleAnim = false
 maxSpeed = 0
 
-REBEL = 1
 USE_STANCE = PISTOL_STANCE1
 NORMAL_SPEED = 9
 NORMAL_MAX_ANGLE = 100
