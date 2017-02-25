@@ -308,7 +308,7 @@ end
 
 function ANIMATION3()
     Turn(base, x_axis, math.rad(-45), math.rad(90))
-    Move(pelvis, y_axis, -1.75, 15)
+    Move(pelvis, y_axis, 1.75, 15)
     Turn(torso, x_axis, math.rad(-10), math.rad(90))
     Turn(torso, y_axis, math.rad(20), math.rad(90))
     Turn(head, x_axis, math.rad(15), math.rad(90))
