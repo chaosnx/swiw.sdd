@@ -6,6 +6,7 @@
     icontype=inf_light;
     soundcategory=imp-i-scouttrooper;
     category=GROUND INFANTRY;
+    script=imp_i_scouttrooper.lua;
 
     name=Scout Trooper;
     description=Imperial Scout;
@@ -24,7 +25,7 @@
     shownanoframe=0;
     smoothanim=0;
 
-    sightdistance=750;
+    sightdistance=700;
     stealth=1;
     seismicdistance=1100;
     seismicsignature=1;
@@ -50,9 +51,6 @@
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
-    weapon2=imp_i_scouttrooper;
-    badtargetcategory2=AIR TANK;
-    onlytargetcategory2=GROUND TAKESGROUNDFIRE;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMALL_MUZZLE_FLASH_FX_RED;
