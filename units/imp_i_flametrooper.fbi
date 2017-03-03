@@ -6,6 +6,7 @@
     icontype=inf_heavy;
     soundcategory=imp-i-reptrooper;
     category=GROUND INFANTRY;
+    script=imp_i_flametrooper.lua;
 
     name=Flame Trooper;
     description=Imperial Flame-Thrower Soldier;
@@ -45,11 +46,10 @@
     selfdestructas=IMP_FLAME_BLAST;
 
     weapon1=imp_i_flametrooper;
+    badtargetcategory1=TANK;
     onlytargetcategory1=GROUND;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
-    weapon2=imp_i_flametrooper;
-    onlytargetcategory2=GROUND;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;

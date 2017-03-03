@@ -333,7 +333,8 @@ function script.setSFXoccupy(level)
     end
 end
 
-local RESTORE_DELAY = Spring.UnitScript.GetLongestReloadTime(unitID) * 2
+local RESTORE_DELAY = math.max(Spring.UnitScript.GetLongestReloadTime(unitID),
+                               250) * 2
 
 local function RestoreAfterDelay()
     SetSignalMask(SIG_AIM + SIG_DYING)
