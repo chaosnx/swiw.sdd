@@ -45,11 +45,11 @@
     selfdestructas=IMP_FLAME_BLAST;
 
     weapon1=imp_i_flametrooper;
-    onlytargetcategory1=INFANTRY DROID TANK WALKER DEFENSE BUILDING CONSTRUCTOR COMMANDER;
+    onlytargetcategory1=GROUND;
     weaponmaindir1=0 0 1;
     maxangledif1=190;
     weapon2=imp_i_flametrooper;
-    onlytargetcategory2=INFANTRY DROID TANK WALKER DEFENSE BUILDING CONSTRUCTOR COMMANDER;
+    onlytargetcategory2=GROUND;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;
