@@ -6,6 +6,7 @@
     icontype=air_trans;
     soundcategory=reb-a-vwing;
     category=AIR TAKESGROUNDFIRE;
+    script=imp_a_laat.lua;
 
     name=LAAT;
     description=Low Altitude Assault Transport;
