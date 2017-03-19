@@ -26,7 +26,7 @@
 
     energyuse=7;
 
-    sightdistance=425;
+    sightdistance=400;
     seismicsignature=1;
 
     activatewhenbuilt=1;

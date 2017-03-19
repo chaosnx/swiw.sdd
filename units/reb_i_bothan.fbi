@@ -25,7 +25,7 @@
     shownanoframe=0;
     levelground=0;
 
-    sightdistance=650;
+    sightdistance=500;
     stealth=1;
     seismicdistance=1200;
 
@@ -71,7 +71,7 @@
     [customparams]
     {
         decloakdistance=170;
-        cloaksightdistance=450;
+        cloaksightdistance=350;
     }
 }
 

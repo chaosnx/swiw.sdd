@@ -24,7 +24,7 @@
     shownanoframe=0;
     levelground=0;
 
-    sightdistance=500;
+    sightdistance=300;
     stealth=1;
     seismicdistance=1000;
     seismicsignature=1;
