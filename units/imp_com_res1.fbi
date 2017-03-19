@@ -32,9 +32,9 @@
     metalmake=5;
     energymake=450;
 
-    sightdistance=700;
-    radardistance=3000;
-    sonardistance=2500;
+    sightdistance=400;
+    radardistance=1200;
+    sonardistance=1200;
 
     builder=1;
     workertime=1;

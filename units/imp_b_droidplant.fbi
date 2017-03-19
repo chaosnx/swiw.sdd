@@ -31,7 +31,7 @@
 
     energymake=25;
 
-    sightdistance=400;
+    sightdistance=300;
 
     builder=1;
     workertime=1;

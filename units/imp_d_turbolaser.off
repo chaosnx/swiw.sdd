@@ -28,7 +28,7 @@
     energyuse=50;
     metalstorage=50;
 
-    sightdistance=550;
+    sightdistance=300;
 
     //onoffable=1;
     activatewhenbuilt=1;
