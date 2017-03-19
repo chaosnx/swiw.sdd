@@ -28,7 +28,7 @@
 
     energyuse=15;
 
-    sightdistance=500;
+    sightdistance=425;
 
     canmove=1;
     maxvelocity=6;
