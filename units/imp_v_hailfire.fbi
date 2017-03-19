@@ -27,7 +27,7 @@
     upright=1;
     shownanoframe=0;
 
-    sightdistance=400;
+    sightdistance=250;
     seismicsignature=1;
 
     canmove=1;

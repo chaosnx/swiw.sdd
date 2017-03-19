@@ -30,7 +30,7 @@
     energyuse=3;
 
     radardistance=1200;
-    sightdistance=850;
+    sightdistance=750;
     seismicdistance=1000;
     stealth=1;
 
