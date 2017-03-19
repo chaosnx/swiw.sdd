@@ -28,7 +28,7 @@
 
     metalstorage=150;
 
-    sightdistance=500;
+    sightdistance=400;
 
     activatewhenbuilt=1;
 

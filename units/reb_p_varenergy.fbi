@@ -36,7 +36,7 @@
     energymake=20;
     energyuse=10;
 
-    sightdistance=400;
+    sightdistance=300;
     //onoffable=1;
 
     canmove=1;

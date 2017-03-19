@@ -30,7 +30,7 @@
 
     energymake=1000;
 
-    sightdistance=400;
+    sightdistance=300;
 
     onoffable=1;
     activatewhenbuilt=1;

@@ -31,7 +31,7 @@
     extractsmetal=0.0018;
     energyuse=100;
 
-    sightdistance=400;
+    sightdistance=150;
 
     onoffable=1;
     activatewhenbuilt=1;
