@@ -207,10 +207,10 @@ if (gadgetHandler:IsSyncedCode()) then
             end
 
                     -- Damage the unit and send it off to unsynced
-            if #flag.unitList > 0 then
+            if #flag.unitList > 0 and flag.unitID ~= nil then
                 local damage = weaponDamage * flag.multiplier
                 local health = GetUnitHealth(flag.unitID)
-                if (health ~= nil) then
+                if (health ~= nil and damage ~= nil) then
                     if (health - damage) > 1 then
                         SetUnitHealth(flag.unitID, health - damage)
                     else
