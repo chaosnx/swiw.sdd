@@ -96,7 +96,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local moveZ = HQ.z + HQ.posData[i].z
 				local moveY = Spring.GetGroundHeight(moveX,moveZ)
 				Spring.GiveOrderToUnit(guardID, CMD.MOVE, {moveX, moveY, moveZ}, 0)
-				Spring.GiveOrderToUnit(guardID, CMD.SET_WANTED_MAX_SPEED, {[1] = GUARD_SPEED}, 16)
+				--Spring.GiveOrderToUnit(guardID, CMD.SET_WANTED_MAX_SPEED, {[1] = GUARD_SPEED}, 16)
 			end
 		end
 	end

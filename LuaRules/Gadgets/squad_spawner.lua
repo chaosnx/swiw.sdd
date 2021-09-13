@@ -54,6 +54,23 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:GameFrame(n)
 		--while # newSquads ~= 0 do
 		for index, squad in ipairs(newSquads) do
+			-- Spring.Echo( table.serialize(newSquads) )
+-- {
+ -- [1] = {
+  -- unitID = 16047,
+  -- members = {
+   -- [1] = {
+    -- y = 93.0263519,
+    -- x = 1205.3186,
+    -- unitname = "imp_i_stormtrooper",
+    -- team = 0,
+    -- heading = 1,
+    -- z = 5198.76611,
+   -- },
+  -- },
+  -- builderID = 208,
+ -- },
+-- }
 
 				-- Get the orders for the squad spawner
 			local squad_spawner = squad.unitID
@@ -67,7 +84,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local squad_units = {}
 				local states = {}
 
-				local queue = GetCommandQueue(squad_spawner)
+				
 				if squad_builder then
 					states = Spring.GetUnitStates(squad_builder)
 				end
@@ -83,6 +100,10 @@ if (gadgetHandler:IsSyncedCode()) then
 					end
 				end
 
+				local queue 
+				-- queue = GetCommandQueue(squad_spawner)
+				-- this was to pass the commands for the units from the building to the squad
+				-- Spring.Echo( table.serialize(queue) )
 					-- If its a valid queue
 				if (queue ~= nil) then
 
