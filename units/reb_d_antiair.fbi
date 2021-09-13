@@ -40,7 +40,7 @@
     selfdestructas=MEDIUM_BUILDING;
 
     weapon1=reb_d_antiair;
-    onlytargetcategory1=AIR;
+    onlytargetcategory1=AIR VTOL;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;

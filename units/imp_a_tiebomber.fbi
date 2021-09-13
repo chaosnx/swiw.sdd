@@ -49,13 +49,13 @@
     explodeas=MEDIUM_UNIT;
     selfdestructas=MEDIUM_UNIT;
 
-    nochasecategory=AIR;
+    nochasecategory=AIR VTOL;
 
     weapon1=imp_a_tiebomber;
     onlytargetcategory1=GROUND;
     weapon2=imp_a_tiebomber_laser;
     badtargetcategory2=GROUND;
-    onlytargetcategory2=GROUND AIR;
+    onlytargetcategory2=GROUND AIR VTOL;
     weaponmaindir2=0 0 1;
     maxangledif2=60;
     [sfxtypes]

@@ -51,7 +51,7 @@
 
     weapon1=imp_a_tieinterceptor;
     badtargetcategory1=GROUND;
-    onlytargetcategory1=GROUND AIR;
+    onlytargetcategory1=GROUND AIR VTOL;
     weaponmaindir1=0 0 1;
     maxangledif1=60;
     [sfxtypes]

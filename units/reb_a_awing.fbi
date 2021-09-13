@@ -55,7 +55,7 @@
     weaponmaindir1=0 0 1;
     maxangledif1=60;
     weapon2=reb_a_awing_missile;
-    onlytargetcategory2=AIR;
+    onlytargetcategory2=AIR VTOL;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;

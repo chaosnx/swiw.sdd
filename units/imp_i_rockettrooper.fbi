@@ -47,7 +47,7 @@
     nochasecategory=VTOL;
 
     weapon1=imp_i_rockettrooper;
-    onlytargetcategory1=AIR;
+    onlytargetcategory1=AIR VTOL;
     canattackground=0;
     //weaponmaindir1=0 0 1;
     //maxangledif1=190;

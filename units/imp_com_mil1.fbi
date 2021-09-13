@@ -74,12 +74,12 @@
     maxangledif4=240;
 
     Weapon5=imp_d_antiair;
-    onlytargetcategory5=AIR;
+    onlytargetcategory5=AIR VTOL;
     WeaponMainDir5=1 0 0;
     MaxAngleDif5=270;
 
     Weapon6=imp_d_antiair;
-    onlytargetcategory6=AIR;
+    onlytargetcategory6=AIR VTOL;
     WeaponMainDir6=-1 0 0;
     MaxAngleDif6=270;
 

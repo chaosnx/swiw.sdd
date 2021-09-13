@@ -40,7 +40,7 @@
     selfdestructas=SMALL_BUILDNG;
 
     weapon1=imp_d_antiair;
-    onlytargetcategory1=AIR;
+    onlytargetcategory1=AIR VTOL;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;

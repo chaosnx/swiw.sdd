@@ -46,7 +46,7 @@
     nochasecategory=AIR;
 
     weapon1=reb_i_rockettrooper;
-    onlytargetcategory1=AIR;
+    onlytargetcategory1=AIR VTOL;
     canattackground=0;
     [sfxtypes]
     {

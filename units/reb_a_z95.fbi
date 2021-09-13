@@ -53,7 +53,7 @@
     onlytargetcategory1=IONTARGETABLE TANK;
     weapon2=reb_a_z95_laser;
     badtargetcategory2=GROUND;
-    onlytargetcategory2=GROUND AIR;
+    onlytargetcategory2=GROUND AIR VTOL;
     weaponmaindir2=0 0 1;
     maxangledif2=60;
     [sfxtypes]

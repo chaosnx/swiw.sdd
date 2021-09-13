@@ -52,7 +52,7 @@
     badtargetcategory1=AIR;
     onlytargetcategory1=GROUND TAKESGROUNDFIRE;
     weapon2=reb_v_t1bmissile;
-    onlytargetcategory2=AIR;
+    onlytargetcategory2=AIR VTOL;
     [sfxtypes]
     {
         explosiongenerator0=custom:SMOKEPUFF_SWS_FX;
