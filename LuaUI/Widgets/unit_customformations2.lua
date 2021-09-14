@@ -33,6 +33,13 @@ local unitIncreaseThresh	= 0.85 -- We only increase maxUnits if the units are gr
 -- Alpha loss per second after releasing mouse
 local lineFadeRate = 2.0
 
+local GetGameRulesParam	= Spring.GetGameRulesParam
+
+local CMD_UNIT_SET_TARGET = GetGameRulesParam("CMD_UNIT_SET_TARGET") 
+local CMD_TURN = GetGameRulesParam("CMD_TURN") 
+local CMD_MORPH = GetGameRulesParam("CMD_MORPH")
+local CMD_CLEAR_PATH = GetGameRulesParam("CMD_CLEARPATH")
+
 -- What commands are eligible for custom formations
 local formationCmds = {
 	[CMD.MOVE] = true,
@@ -40,13 +47,17 @@ local formationCmds = {
 	[CMD.ATTACK] = true,
 	[CMD.PATROL] = true,
 	[CMD.UNLOAD_UNIT] = true,
-	[38521] = true -- Jump
+	[CMD_UNIT_SET_TARGET] = true,
+	[CMD_MORPH] = true,
+	[CMD_TURN] = true,
+    [CMD_CLEAR_PATH] = true,
 }
 
 -- What commands require alt to be held (Must also appear in formationCmds)
 local requiresAlt = {
 	[CMD.ATTACK] = true,
-	[CMD.UNLOAD_UNIT] = true
+	[CMD.UNLOAD_UNIT] = true,
+	[CMD_UNIT_SET_TARGET] = true, -- settarget
 }
 
 -- Context-based default commands that can be overridden (i.e. guard when mouseover unit)
@@ -59,8 +70,9 @@ local overrideCmds = {
 -- What commands are issued at a position or unit/feature ID (Only used by GetUnitPosition)
 local positionCmds = {
 	[CMD.MOVE]=true,		[CMD.ATTACK]=true,		[CMD.RECLAIM]=true,		[CMD.RESTORE]=true,		[CMD.RESURRECT]=true,
-	[CMD.PATROL]=true,		[CMD.CAPTURE]=true,		[CMD.FIGHT]=true, 		[CMD.DGUN]=true,		[38521]=true, -- jump
+	[CMD.PATROL]=true,		[CMD.CAPTURE]=true,		[CMD.FIGHT]=true, 		[CMD.DGUN]=true,		[CMD_MORPH]=true,
 	[CMD.UNLOAD_UNIT]=true,	[CMD.UNLOAD_UNITS]=true,[CMD.LOAD_UNITS]=true,	[CMD.GUARD]=true,		[CMD.AREA_ATTACK] = true,
+    [CMD_CLEAR_PATH] = true,
 }
 
 --------------------------------------------------------------------------------
@@ -139,12 +151,14 @@ local CMD_MOVE = CMD.MOVE
 local CMD_ATTACK = CMD.ATTACK
 local CMD_UNLOADUNIT = CMD.UNLOAD_UNIT
 local CMD_UNLOADUNITS = CMD.UNLOAD_UNITS
-local CMD_SET_WANTED_MAX_SPEED = CMD.SET_WANTED_MAX_SPEED
+local CMD_SET_WANTED_MAX_SPEED = CMD.SET_WANTED_MAX_SPEED or 1002  -- See LuaRules/Gadgets/unit_customformations2.lua
 local CMD_OPT_ALT = CMD.OPT_ALT
 local CMD_OPT_CTRL = CMD.OPT_CTRL
 local CMD_OPT_META = CMD.OPT_META
 local CMD_OPT_SHIFT = CMD.OPT_SHIFT
 local CMD_OPT_RIGHT = CMD.OPT_RIGHT
+
+local REMOVED_SET_WANTED_MAX_SPEED = not CMD.SET_WANTED_MAX_SPEED
 
 local keyShift = 304
 
@@ -165,7 +179,7 @@ local function GetUnitFinalPosition(uID)
 	
 	local ux, uy, uz = spGetUnitPosition(uID)
 	
-	local cmds = spGetCommandQueue(uID)
+	local cmds = spGetCommandQueue(uID, -1)
 	for i = #cmds, 1, -1 do
 		
 		local cmd = cmds[i]
@@ -320,14 +334,41 @@ local function GiveNotifyingOrder(cmdID, cmdParams, cmdOpts)
 	spGiveOrder(cmdID, cmdParams, cmdOpts.coded)
 end
 local function GiveNotifyingOrderToUnit(uID, cmdID, cmdParams, cmdOpts)
-	
+	if not cmdParams or cmdParams[1] == 0 then Spring.Echo("CustomFormations is guilty as charged! Please report to FLOZi at once with demo!", uID, cmdParams[1], cmdParams[2], cmdParams[3]) end
 	for _, w in ipairs(widgetHandler.widgets) do
 		if w.UnitCommandNotify and w:UnitCommandNotify(uID, cmdID, cmdParams, cmdOpts) then
 			return
 		end
 	end
-	
+ 
 	spGiveOrderToUnit(uID, cmdID, cmdParams, cmdOpts.coded)
+end
+
+local function SendSetWantedMaxSpeed(alt, ctrl, meta, shift)
+	-- Move Speed (Applicable to every order)
+	local wantedSpeed = 99999 -- High enough to exceed all units speed, but not high enough to cause errors (i.e. vs math.huge)
+	if ctrl then
+		local selUnits = spGetSelectedUnits()
+		for i = 1, #selUnits do
+			local ud = UnitDefs[spGetUnitDefID(selUnits[i])]
+			local uSpeed = ud and ud.speed
+			if uSpeed and uSpeed > 0 and uSpeed < wantedSpeed then
+				wantedSpeed = uSpeed
+			end
+		end
+	elseif REMOVED_SET_WANTED_MAX_SPEED then
+		wantedSpeed = -1
+	end
+	
+	-- Directly giving speed order appears to work perfectly, including with shifted orders ...
+	-- ... But other widgets CMD.INSERT the speed order into the front (Posn 1) of the queue instead (which doesn't work with shifted orders)
+	if REMOVED_SET_WANTED_MAX_SPEED then
+		local units = Spring.GetSelectedUnits()
+		Spring.GiveOrderToUnitArray(units, CMD_SET_WANTED_MAX_SPEED, {wantedSpeed}, 0)
+	else
+		local speedOpts = GetCmdOpts(alt, ctrl, meta, shift, true)
+		GiveNotifyingOrder(CMD_SET_WANTED_MAX_SPEED, {wantedSpeed / 30}, speedOpts)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -502,12 +543,12 @@ function widget:MouseRelease(mx, my, mButton)
 	
 	-- Using path? If so then we do nothing
 	if draggingPath then
-		
+		--Spring.Echo("draggingPath")
 		draggingPath = false
 		
 	-- Using formation? If so then it's time to calculate and issue orders.
 	elseif usingFormation then
-		
+		--Spring.Echo("usingFormation")
 		-- Add final position (Sometimes we don't get the last MouseMove before this MouseRelease)
 		if (not inMinimap) or spIsAboveMiniMap(mx, my) then
 			local _, pos = spTraceScreenRay(mx, my, true, inMinimap)
@@ -535,12 +576,15 @@ function widget:MouseRelease(mx, my, mButton)
 				
 				local orders
 				if (#mUnits <= maxHungarianUnits) then
+					--Spring.Echo("Hungarian")
 					orders = GetOrdersHungarian(interpNodes, mUnits, #mUnits, shift and not meta)
 				else
+					--Spring.Echo("NoX")
 					orders = GetOrdersNoX(interpNodes, mUnits, #mUnits, shift and not meta)
 				end
 				
 				if meta then
+					--Spring.Echo("meta")
 					local altOpts = GetCmdOpts(true, false, false, false, false)
 					for i = 1, #orders do
 						local orderPair = orders[i]
@@ -548,6 +592,7 @@ function widget:MouseRelease(mx, my, mButton)
 						GiveNotifyingOrderToUnit(orderPair[1], CMD_INSERT, {0, usingCmd, cmdOpts.coded, orderPos[1], orderPos[2], orderPos[3]}, altOpts)
 					end
 				else
+					--Spring.Echo("not meta")
 					for i = 1, #orders do
 						local orderPair = orders[i]
 						GiveNotifyingOrderToUnit(orderPair[1], usingCmd, orderPair[2], cmdOpts)
@@ -555,24 +600,24 @@ function widget:MouseRelease(mx, my, mButton)
 				end
 			end
 		end
-		
-		-- Move Speed (Applicable to every order)
-		local wantedSpeed = 99999 -- High enough to exceed all units speed, but not high enough to cause errors (i.e. vs math.huge)
-		
-		if ctrl then
-			local selUnits = spGetSelectedUnits()
-			for i = 1, #selUnits do
-				local uSpeed = UnitDefs[spGetUnitDefID(selUnits[i])].speed
-				if uSpeed > 0 and uSpeed < wantedSpeed then
-					wantedSpeed = uSpeed
-				end
-			end
-		end
-		
-		-- Directly giving speed order appears to work perfectly, including with shifted orders ...
-		-- ... But other widgets CMD.INSERT the speed order into the front (Posn 1) of the queue instead (which doesn't work with shifted orders)
-		local speedOpts = GetCmdOpts(alt, ctrl, meta, shift, true)
-		GiveNotifyingOrder(CMD_SET_WANTED_MAX_SPEED, {wantedSpeed / 30}, speedOpts)
+  
+										   
+																															 
+  
+			  
+										
+						  
+															  
+											   
+						 
+	   
+	  
+	 
+
+		SendSetWantedMaxSpeed(alt, ctrl, meta, shift)
+																																		   
+															
+																			 
 	end
 	
 	if #fNodes > 1 then
@@ -649,11 +694,11 @@ function widget:Update(deltaTime)
 	if dimmAlpha <= 0 then
 		
 		dimmNodes = {}
-		widgetHandler:RemoveWidgetCallIn("Update", self)
+		WG.RemoveWidgetCallIn("Update", self)
 		
 		if #fNodes == 0 then
-			widgetHandler:RemoveWidgetCallIn("DrawWorld", self)
-			widgetHandler:RemoveWidgetCallIn("DrawInMiniMap", self)
+			WG.RemoveWidgetCallIn("DrawWorld", self)
+			WG.RemoveWidgetCallIn("DrawInMiniMap", self)
 		end
 	end
 end
