@@ -39,7 +39,7 @@ local CMD_UNIT_SET_TARGET = GetGameRulesParam("CMD_UNIT_SET_TARGET")
 local CMD_TURN = GetGameRulesParam("CMD_TURN") 
 local CMD_MORPH = GetGameRulesParam("CMD_MORPH")
 local CMD_CLEAR_PATH = GetGameRulesParam("CMD_CLEARPATH")
-
+local CMD_JUMP = 38521
 -- What commands are eligible for custom formations
 local formationCmds = {
 	[CMD.MOVE] = true,
@@ -47,17 +47,18 @@ local formationCmds = {
 	[CMD.ATTACK] = true,
 	[CMD.PATROL] = true,
 	[CMD.UNLOAD_UNIT] = true,
-	[CMD_UNIT_SET_TARGET] = true,
-	[CMD_MORPH] = true,
-	[CMD_TURN] = true,
-    [CMD_CLEAR_PATH] = true,
+	-- [CMD_UNIT_SET_TARGET] = true,
+	-- [CMD_MORPH] = true,
+	-- [CMD_TURN] = true,
+    -- [CMD_CLEAR_PATH] = true,
+	[CMD_JUMP] = true
 }
 
 -- What commands require alt to be held (Must also appear in formationCmds)
 local requiresAlt = {
 	[CMD.ATTACK] = true,
 	[CMD.UNLOAD_UNIT] = true,
-	[CMD_UNIT_SET_TARGET] = true, -- settarget
+	-- [CMD_UNIT_SET_TARGET] = true, -- settarget
 }
 
 -- Context-based default commands that can be overridden (i.e. guard when mouseover unit)
@@ -70,9 +71,9 @@ local overrideCmds = {
 -- What commands are issued at a position or unit/feature ID (Only used by GetUnitPosition)
 local positionCmds = {
 	[CMD.MOVE]=true,		[CMD.ATTACK]=true,		[CMD.RECLAIM]=true,		[CMD.RESTORE]=true,		[CMD.RESURRECT]=true,
-	[CMD.PATROL]=true,		[CMD.CAPTURE]=true,		[CMD.FIGHT]=true, 		[CMD.DGUN]=true,		[CMD_MORPH]=true,
+	[CMD.PATROL]=true,		[CMD.CAPTURE]=true,		[CMD.FIGHT]=true, 		[CMD.DGUN]=true,		[CMD_JUMP]=true,
 	[CMD.UNLOAD_UNIT]=true,	[CMD.UNLOAD_UNITS]=true,[CMD.LOAD_UNITS]=true,	[CMD.GUARD]=true,		[CMD.AREA_ATTACK] = true,
-    [CMD_CLEAR_PATH] = true,
+    -- [CMD_CLEAR_PATH] = true,
 }
 
 --------------------------------------------------------------------------------
@@ -340,7 +341,7 @@ local function GiveNotifyingOrderToUnit(uID, cmdID, cmdParams, cmdOpts)
 			return
 		end
 	end
- 
+	
 	spGiveOrderToUnit(uID, cmdID, cmdParams, cmdOpts.coded)
 end
 
@@ -600,24 +601,8 @@ function widget:MouseRelease(mx, my, mButton)
 				end
 			end
 		end
-  
-										   
-																															 
-  
-			  
-										
-						  
-															  
-											   
-						 
-	   
-	  
-	 
 
 		SendSetWantedMaxSpeed(alt, ctrl, meta, shift)
-																																		   
-															
-																			 
 	end
 	
 	if #fNodes > 1 then
@@ -694,11 +679,11 @@ function widget:Update(deltaTime)
 	if dimmAlpha <= 0 then
 		
 		dimmNodes = {}
-		WG.RemoveWidgetCallIn("Update", self)
+		widgetHandler:RemoveWidgetCallIn("Update", self)
 		
 		if #fNodes == 0 then
-			WG.RemoveWidgetCallIn("DrawWorld", self)
-			WG.RemoveWidgetCallIn("DrawInMiniMap", self)
+			widgetHandler:RemoveWidgetCallIn("DrawWorld", self)
+			widgetHandler:RemoveWidgetCallIn("DrawInMiniMap", self)
 		end
 	end
 end

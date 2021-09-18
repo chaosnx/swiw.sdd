@@ -48,6 +48,9 @@ end
 -- Load
 --
 VFS.Include("LuaRules/Includes/utilities.lua", nil, VFS.ZIP)
+VFS.Include(LUAUI_DIRNAME.."modfonts.lua"    , nil, VFS.GAME)
+
+
 VFS.Include("LuaHandler/Utilities/utils.lua", nil, VFS.DEF_MODE)
 
 --// the addon handler
@@ -59,3 +62,4 @@ Spring.Log(LUA_NAME, "info", LUA_VERSION .. " (" .. _VERSION .. ")")
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
+
