@@ -81,10 +81,12 @@ end
 
 local function LandAnim()
 	while (true) do
+	
 		while (not shuttleLand) do
 			Sleep(200)
 		end
-		Spring.Echo('imp_b_barracks Land')
+		
+		-- Spring.Echo('imp_b_barracks Land')
 		Move		( shuttle, y_axis, 1500 )
 		Move        ( shuttle, y_axis, 250, 750)
 		WaitForMove ( shuttle, y_axis )
@@ -106,7 +108,7 @@ local function LandAnim()
 			Sleep(200)
 		end
 
-		Spring.Echo('imp_b_barracks Takeoff')
+		-- Spring.Echo('imp_b_barracks Takeoff')
 		Move        ( shuttle, y_axis, 25, 37)
 		WaitForMove ( shuttle, y_axis )
 		Move        ( shuttle, y_axis, 50, 75)
@@ -134,7 +136,7 @@ local function BuildScript()
 	while (true) do
 		if (isBuilding) then
 			builtUnitID = Spring.GetUnitIsBuilding( unitID )
-			Spring.Echo('imp_b_barracks builtUnitID', builtUnitID )
+			-- Spring.Echo('imp_b_barracks builtUnitID', builtUnitID )
 		else
 			shuttleLand = false
 			builtUnitID = nil
@@ -142,7 +144,7 @@ local function BuildScript()
 		if (builtUnitID) then
 			progress = select(5, Spring.GetUnitHealth(builtUnitID))
 			if (not (progress==nil)) then
-				Spring.Echo('imp_b_barracks progress', progress )
+				-- Spring.Echo('imp_b_barracks progress', progress )
 				if (progress > 0.30 and not shuttleLand) then
 					shuttleLand = true
 				end
