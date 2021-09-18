@@ -69,13 +69,8 @@ local pieceNr_pieceName = Spring.GetUnitPieceList ( unitID )
 local pieceName_pieceNr = Spring.GetUnitPieceMap  ( unitID )
 
 local SIG_ACTIVATE = 2
-local SIG_LAND = 3
 
-local isBuilding
-local isBuildingNow
-local shuttleActive
-local shuttleLanded
-local shuttleWantTakeoff
+local shuttleLand = false
 
 local CustomEmitter = function (pieceName, effectName)
 	--Spring.Echo(pieceName, effectName)
@@ -84,79 +79,81 @@ local CustomEmitter = function (pieceName, effectName)
 	Spring.SpawnCEG(effectName, x,y,z, dx, dy, dz)
 end
 
-local function Land()
-	Spring.Echo('imp_b_barracks Land')
-	Signal(SIG_LAND) -- Kill any other copies of this thread
-	SetSignalMask(SIG_LAND) -- Allow this thread to be killed by fresh copies
-	local builtUnitID = nil
-	if (not builtUnitID) then
-		Sleep(100)
-		builtUnitID = Spring.GetUnitIsBuilding( unitID )
-		Spring.Echo('imp_b_barracks Land', builtUnitID )
-	end
-	-- put build point under base (remove vis)
-	--Move(bpt, y_axis, -75)
-	-- TODO: You can run any animation that continues throughout the build process here e.g. spin pad
-	local progress = select(5, Spring.GetUnitHealth(builtUnitID))
-	while (progress < 0.30) do
-		Sleep(300)
-		progress = select(5, Spring.GetUnitHealth(builtUnitID))
-		Spring.Echo('imp_b_barracks build', progress)
-	end
-	Spring.Echo('imp_b_barracks Land end')
-
-	Spring.Echo('imp_b_barracks Land')
-	shuttleActive = 1
-	Move        ( shuttle, y_axis, 250, 750)
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 125, 325)
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 100, 225)
-	Turn        ( shuttle, y_axis, math.rad(0), 90 )
-	WaitForTurn ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 75, 150)
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 75, 150)
-	Turn        (    finl, z_axis, math.rad(0), 90 )
-	Turn        (    finr, z_axis, math.rad(0), 90 )
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 0, 37.5)
-	WaitForMove ( shuttle, y_axis )
-	
-	while (progress > 0.70) do
-		Sleep(300)
-		progress = select(5, Spring.GetUnitHealth(builtUnitID))
-		Spring.Echo('imp_b_barracks build', progress)
-	end
-
-	Spring.Echo('imp_b_barracks Takeoff')
-	shuttleActive = 1;
-	Move        ( shuttle, y_axis, 25, 37)
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 50, 75)
-	Turn        (    finl, z_axis, math.rad(120), 90 )
-	Turn        (    finr, z_axis, math.rad(-120), 90 )
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 75, 150)
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 100, 225)
-	Turn        ( shuttle, y_axis, math.rad(180), 90 )
-	WaitForTurn ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 250, 325)
-	WaitForMove ( shuttle, y_axis )
-	Move        ( shuttle, y_axis, 6250, 750)
-	WaitForMove ( shuttle, y_axis )
+local function LandAnim()
+	while (true) do
+		while (not shuttleLand) do
+			Sleep(200)
+		end
+		Spring.Echo('imp_b_barracks Land')
+		Move		( shuttle, y_axis, 1500 )
+		Move        ( shuttle, y_axis, 250, 750)
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 125, 325)
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 100, 225)
+		Turn        ( shuttle, y_axis, math.rad(0), math.rad(90) )
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 75, 150)
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 75, 150)
+		Turn        (    finl, z_axis, math.rad(0), math.rad(90) )
+		Turn        (    finr, z_axis, math.rad(0), math.rad(90) )
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 0, 37.5)
+		WaitForMove ( shuttle, y_axis )
 		
+		while (shuttleLand) do
+			Sleep(200)
+		end
+
+		Spring.Echo('imp_b_barracks Takeoff')
+		Move        ( shuttle, y_axis, 25, 37)
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 50, 75)
+		Turn        (    finl, z_axis, math.rad(-120), math.rad(90) )
+		Turn        (    finr, z_axis, math.rad(120), math.rad(90) )
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 75, 150)
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 100, 225)
+		Turn        ( shuttle, y_axis, math.rad(180), math.rad(90) )
+		WaitForTurn ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 250, 325)
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 1500, 1500)
+		WaitForMove ( shuttle, y_axis )
+		Move        ( shuttle, y_axis, 6250)
+	end
 end
 
 local function BuildScript()
 	Spring.Echo('imp_b_barracks BuildScript')
+	local currentBuiltUnitID = nil
+	local builtUnitID = nil
+	local progress = 0
 	while (true) do
 		if (isBuilding) then
-			SetUnitValue(COB.BUGGER_OFF, 1)
-			isBuildingNow = true		
+			builtUnitID = Spring.GetUnitIsBuilding( unitID )
+			Spring.Echo('imp_b_barracks builtUnitID', builtUnitID )
+		else
+			shuttleLand = false
+			builtUnitID = nil
+		end		
+		if (builtUnitID) then
+			progress = select(5, Spring.GetUnitHealth(builtUnitID))
+			if (not (progress==nil)) then
+				Spring.Echo('imp_b_barracks progress', progress )
+				if (progress > 0.30 and not shuttleLand) then
+					shuttleLand = true
+				end
+				if (progress > 0.90 and shuttleLand) then
+					shuttleLand = false
+				end
+			else
+				builtUnitID = nil
+			end
 		end
-		Sleep(2000)
+		Sleep(200)
 	end
 end
 
@@ -164,13 +161,11 @@ function script.Create()
 	SetUnitValue(COB.YARD_OPEN, 0)
 	SetUnitValue(COB.INBUILDSTANCE, 0)
 	isBuilding = false
-	shuttleActive = 0
-	shuttleLanded = 0
-	shuttleWantTakeoff=0
-	Move( shuttle, y_axis, 6250 )
+	shuttleLand = false
+	Move( shuttle, y_axis, 1500 )
 	Turn( shuttle, y_axis, math.rad(180) )
-	Turn( finl, z_axis,  math.rad(120) )
-	Turn( finr, z_axis, -math.rad(120) )
+	Turn( finl, z_axis, -math.rad(120) )
+	Turn( finr, z_axis,  math.rad(120) )
 	local percent = select(5, Spring.GetUnitHealth(unitID))
 	-- local percent = GetUnitValue(COB.BUILD_PERCENT_LEFT) -- BUG always return 0
 	while ( percent < 1.0 ) do
@@ -182,6 +177,7 @@ function script.Create()
 	
 	Spin( radar, y_axis, math.rad(100) )
     StartThread(BuildScript)
+	StartThread(LandAnim)
     StartThread(SmokeUnit_SWS)
 end
 
@@ -191,17 +187,17 @@ function script.QueryBuildInfo()
 end
 
 local function OpenCloseAnim(open)
-	Spring.Echo('imp_b_barracks OpenCloseAnim', open)
+	-- Spring.Echo('imp_b_barracks OpenCloseAnim', open)
 	SetSignalMask(SIG_ACTIVATE) -- Allow this thread to be killed by fresh copies
 	Signal(SIG_ACTIVATE) -- Kill any other copies of this thread
-	Spring.Echo('YARD_OPEN, BUGGER_OFF, INBUILDSTANCE',GetUnitValue(COB.YARD_OPEN),GetUnitValue(COB.BUGGER_OFF),GetUnitValue(COB.INBUILDSTANCE))
+	-- Spring.Echo('YARD_OPEN, BUGGER_OFF, INBUILDSTANCE',GetUnitValue(COB.YARD_OPEN),GetUnitValue(COB.BUGGER_OFF),GetUnitValue(COB.INBUILDSTANCE))
 	if open then
 		isBuilding = true
 	else
 		isBuilding = false
 	end
 
-	Spring.Echo("OpenCloseAnim", GetUnitValue(COB.YARD_OPEN), open)
+	-- Spring.Echo("OpenCloseAnim", GetUnitValue(COB.YARD_OPEN), open)
 	local count = 0
 	while not (GetUnitValue(COB.YARD_OPEN) == open) do
 		count = count + 1
@@ -212,7 +208,7 @@ local function OpenCloseAnim(open)
 	end
 	SetUnitValue(COB.BUGGER_OFF, not open)
 	SetUnitValue(COB.INBUILDSTANCE, open)
-	Spring.Echo('imp_b_barracks OpenCloseAnim end')
+	-- Spring.Echo('imp_b_barracks OpenCloseAnim end')
 end
 
 -- Called when factory opens
@@ -230,22 +226,17 @@ function script.Deactivate()
 end
 
 -- script.StartBuilding(heading, angle)
-function script.StartBuilding(...)
-	local t = {...}
-	Spring.Echo('imp_b_barracks StartBuilding', table.serialize(t) )
-	for k, v in pairs(t) do
-		Spring.Echo(k, v)
-	end
-	if (select('#',t)==2) then 
-	end
-	StartThread(Land)
+function script.StartBuilding(heading, angle)
+	Move(bpt, y_axis, -75)
+	-- TODO: You can run any animation that signifies the end of the build process here
+	Sleep(500)
 end
 
 function script.StopBuilding()
-	Spring.Echo('imp_b_barracks StopBuilding' )
+	shuttleLand = false
 	Move(bpt, y_axis, 0)
 	-- TODO: You can run any animation that signifies the end of the build process here
-	Sleep(5000)
+	Sleep(500)
 end
 
 function script.Killed(recentDamage, maxHealth)
