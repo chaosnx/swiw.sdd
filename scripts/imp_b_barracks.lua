@@ -161,10 +161,10 @@ function script.Create()
 	Turn( finl, z_axis,  math.rad(120) )
 	Turn( finr, z_axis, -math.rad(120) )
 	local percent = select(5, Spring.GetUnitHealth(unitID))
-	-- local percent = Spring.UnitScript.GetUnitValue(COB.BUILD_PERCENT_LEFT) -- BUG always return 0
+	-- local percent = GetUnitValue(COB.BUILD_PERCENT_LEFT) -- BUG always return 0
 	while ( percent < 100 ) do
 		Sleep(100)
-		-- percent = Spring.UnitScript.GetUnitValue(COB.BUILD_PERCENT_LEFT)
+		-- percent = GetUnitValue(COB.BUILD_PERCENT_LEFT)
 		percent = select(5, Spring.GetUnitHealth(unitID))
 		Spring.Echo(percent)
 	end
@@ -231,14 +231,14 @@ function script.StartBuilding(...)
 	-- put build point under base (remove vis)
 	--Move(bpt, y_axis, -75)
 	-- TODO: You can run any animation that continues throughout the build process here e.g. spin pad
-	local progress = Spring.UnitScript.GetUnitValue(unitID, COB.UNIT_BUILD_PERCENT_LEFT)
+	local progress = GetUnitValue(COB.UNIT_BUILD_PERCENT_LEFT)
 	while (progress < 100) do
 		if (progress <= 30) then
 			StartThread( Land )
 		end
 		Sleep(300)
-		progress = Spring.UnitScript.GetUnitValue(unitID, COB.UNIT_BUILD_PERCENT_LEFT)
-		Spring.Echo('imp_b_barracks StartBuilding UNIT_BUILD_PERCENT_LEFT', progress, Spring.UnitScript.GetUnitCOBValue(COB.BUILD_PERCENT_LEFT) )
+		progress = GetUnitValue(COB.UNIT_BUILD_PERCENT_LEFT)
+		-- Spring.Echo('imp_b_barracks StartBuilding UNIT_BUILD_PERCENT_LEFT', progress, Spring.UnitScript.GetUnitCOBValue(unitID, COB.BUILD_PERCENT_LEFT) )
 	end
 	shuttleWantTakeoff=1
 	StartThread(Takeoff, 3000)
