@@ -162,11 +162,11 @@ function script.Create()
 	Turn( finr, z_axis, -math.rad(120) )
 	local percent = select(5, Spring.GetUnitHealth(unitID))
 	-- local percent = GetUnitValue(COB.BUILD_PERCENT_LEFT) -- BUG always return 0
-	while ( percent < 100 ) do
+	while ( percent < 1 ) do
 		Sleep(100)
 		-- percent = GetUnitValue(COB.BUILD_PERCENT_LEFT)
 		percent = select(5, Spring.GetUnitHealth(unitID))
-		Spring.Echo(percent)
+		-- Spring.Echo(percent)
 	end
 	
 	Spin( radar, y_axis, math.rad(100) )
