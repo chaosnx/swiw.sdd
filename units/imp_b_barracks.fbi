@@ -9,6 +9,7 @@
     category=GROUND FACTORY BUILDING;
     tedclass=PLANT;
     yardmap=oooooooocc oooooooooc oooocccooo oooocccooo ooccccccoo ooccccccoo ooccccccoo ooccccccoo oocccccooc cccccccccc;
+    script=imp_b_barracks.lua;
 
     name=Barracks;
     description=Infantry Center;
@@ -50,6 +51,6 @@
 
     [sfxtypes]
     {
-        explosiongenerator0=custom:SMOKEPUFF_SWS_FX;
+        //explosiongenerator0=custom:SMOKEPUFF_SWS_FX;
     }
 }
