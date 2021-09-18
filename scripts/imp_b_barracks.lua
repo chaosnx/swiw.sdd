@@ -69,6 +69,7 @@ local pieceNr_pieceName = Spring.GetUnitPieceList ( unitID )
 local pieceName_pieceNr = Spring.GetUnitPieceMap  ( unitID )
 
 local SIG_ACTIVATE = 2
+local SIG_LAND = 3
 
 local isBuilding
 local isBuildingNow
@@ -84,58 +85,68 @@ local CustomEmitter = function (pieceName, effectName)
 end
 
 local function Land()
-	if (not shuttleActive and not shuttleLanded) then
-		Spring.Echo('imp_b_barracks Land')
-		shuttleActive = 1
-		Move        ( shuttle, y_axis, 250, 750)
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 125, 325)
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 100, 225)
-		Turn        ( shuttle, y_axis, math.rad(0), 90 )
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 75, 150)
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 75, 150)
-		Turn        (    finl, z_axis, math.rad(0), 90 )
-		Turn        (    finr, z_axis, math.rad(0), 90 )
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 0, 37.5)
-		WaitForMove ( shuttle, y_axis )
-		shuttleActive = 0
-		shuttleLanded = 1
-	end
-	return 0
-end
-
-local function Takeoff(delay)
-	Sleep(delay)
-	while (shuttleWantTakeoff and shuttleActive) do
+	Spring.Echo('imp_b_barracks Land')
+	Signal(SIG_LAND) -- Kill any other copies of this thread
+	SetSignalMask(SIG_LAND) -- Allow this thread to be killed by fresh copies
+	local builtUnitID = nil
+	if (not builtUnitID) then
 		Sleep(100)
+		builtUnitID = Spring.GetUnitIsBuilding( unitID )
+		Spring.Echo('imp_b_barracks Land', builtUnitID )
 	end
-	if (not shuttleActive and shuttleLanded) then
-		Spring.Echo('imp_b_barracks Takeoff')
-		shuttleActive = 1;
-		Move        ( shuttle, y_axis, 25, 37)
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 50, 75)
-		Turn        (    finl, z_axis, math.rad(120), 90 )
-		Turn        (    finr, z_axis, math.rad(-120), 90 )
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 75, 150)
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 100, 225)
-		Turn        ( shuttle, y_axis, math.rad(180), 90 )
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 250, 325)
-		WaitForMove ( shuttle, y_axis )
-		Move        ( shuttle, y_axis, 6250, 750)
-		WaitForMove ( shuttle, y_axis )
-		shuttleActive=0;
-		shuttleLanded=0;
-		shuttleWantTakeoff=0;
+	-- put build point under base (remove vis)
+	--Move(bpt, y_axis, -75)
+	-- TODO: You can run any animation that continues throughout the build process here e.g. spin pad
+	local progress = select(5, Spring.GetUnitHealth(builtUnitID))
+	while (progress < 0.30) do
+		Sleep(300)
+		progress = select(5, Spring.GetUnitHealth(builtUnitID))
+		Spring.Echo('imp_b_barracks build', progress)
 	end
-	return 0
+	Spring.Echo('imp_b_barracks Land end')
+
+	Spring.Echo('imp_b_barracks Land')
+	shuttleActive = 1
+	Move        ( shuttle, y_axis, 250, 750)
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 125, 325)
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 100, 225)
+	Turn        ( shuttle, y_axis, math.rad(0), 90 )
+	WaitForTurn ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 75, 150)
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 75, 150)
+	Turn        (    finl, z_axis, math.rad(0), 90 )
+	Turn        (    finr, z_axis, math.rad(0), 90 )
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 0, 37.5)
+	WaitForMove ( shuttle, y_axis )
+	
+	while (progress > 0.70) do
+		Sleep(300)
+		progress = select(5, Spring.GetUnitHealth(builtUnitID))
+		Spring.Echo('imp_b_barracks build', progress)
+	end
+
+	Spring.Echo('imp_b_barracks Takeoff')
+	shuttleActive = 1;
+	Move        ( shuttle, y_axis, 25, 37)
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 50, 75)
+	Turn        (    finl, z_axis, math.rad(120), 90 )
+	Turn        (    finr, z_axis, math.rad(-120), 90 )
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 75, 150)
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 100, 225)
+	Turn        ( shuttle, y_axis, math.rad(180), 90 )
+	WaitForTurn ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 250, 325)
+	WaitForMove ( shuttle, y_axis )
+	Move        ( shuttle, y_axis, 6250, 750)
+	WaitForMove ( shuttle, y_axis )
+		
 end
 
 local function BuildScript()
@@ -162,7 +173,7 @@ function script.Create()
 	Turn( finr, z_axis, -math.rad(120) )
 	local percent = select(5, Spring.GetUnitHealth(unitID))
 	-- local percent = GetUnitValue(COB.BUILD_PERCENT_LEFT) -- BUG always return 0
-	while ( percent < 1 ) do
+	while ( percent < 1.0 ) do
 		Sleep(100)
 		-- percent = GetUnitValue(COB.BUILD_PERCENT_LEFT)
 		percent = select(5, Spring.GetUnitHealth(unitID))
@@ -227,24 +238,11 @@ function script.StartBuilding(...)
 	end
 	if (select('#',t)==2) then 
 	end
-	
-	-- put build point under base (remove vis)
-	--Move(bpt, y_axis, -75)
-	-- TODO: You can run any animation that continues throughout the build process here e.g. spin pad
-	local progress = GetUnitValue(COB.UNIT_BUILD_PERCENT_LEFT)
-	while (progress < 100) do
-		if (progress <= 30) then
-			StartThread( Land )
-		end
-		Sleep(300)
-		progress = GetUnitValue(COB.UNIT_BUILD_PERCENT_LEFT)
-		-- Spring.Echo('imp_b_barracks StartBuilding UNIT_BUILD_PERCENT_LEFT', progress, Spring.UnitScript.GetUnitCOBValue(unitID, COB.BUILD_PERCENT_LEFT) )
-	end
-	shuttleWantTakeoff=1
-	StartThread(Takeoff, 3000)
+	StartThread(Land)
 end
 
 function script.StopBuilding()
+	Spring.Echo('imp_b_barracks StopBuilding' )
 	Move(bpt, y_axis, 0)
 	-- TODO: You can run any animation that signifies the end of the build process here
 	Sleep(5000)
