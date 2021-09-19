@@ -8,6 +8,7 @@
     soundcategory=KBOTPLANT;
     category=COMMANDER GROUND FACTORY BUILDING;
     tedclass=PLANT;
+	script=imp_commander.lua;
     yardmap=cccccccccccccccc cccccccccccccccc cccccccooccccccc ccccoooooooocccc ccccoooooooocccc ccccoooooooocccc cccooooooooooccc cccooooooooooccc cccooooccooooccc ccccoooccooocccc ccccoooccooocccc ccccoooccooocccc cccccccccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc;
 
     name=Garrison Base;
